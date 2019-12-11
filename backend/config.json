@@ -1,0 +1,11 @@
+{
+    "db": {
+        "host": "cluster0-hldqz.mongodb.net",
+        "dbname": "ExpenseCalculator",
+        "username": "dev",
+        "password": "DEV123!"
+    },
+    "jwt": {
+        "key" : "kluch"
+    }
+}
