@@ -4,7 +4,7 @@ var jwt = require('express-jwt');
 const config = require('../config/index.js');
 const db = require('../db/connection');
 const auth = require('../handlers/auth');
-const path = require('path');
+// const path = require('path');
 var c = config.getConfig("db");
 db.init(c);
 

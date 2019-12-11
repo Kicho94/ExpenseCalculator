@@ -14,15 +14,14 @@ const register = (req, res) => {
                 bcrypt.hash(req.body.password, salt, function(err, hash) {
                     if(err){
                         throw new Error(err);
-                        return;
+                        return res.status(500).send(err);
                     }
-              return mUsers.createUser({...req.body, password : hash})
+              return mUsers.createUser({...req.body, password: hash})
                 });
             });
-           
         } else {
             throw new Error('Validation failed');
-            return;
+            return res.status(500).send('Internal Server Error');
         }
     })
     .then(() => {
