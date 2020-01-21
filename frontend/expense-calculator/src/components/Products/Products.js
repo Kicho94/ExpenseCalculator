@@ -2,13 +2,15 @@ import React from 'react'
 import Header from '../Header/Header'
 import TableP from '../Tables/TableP'
 import './products.css'
+import datap from '../../DataP'
 
 
 export default class Products extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : null
+            value : null,
+            
         }       
             }
     
@@ -17,9 +19,8 @@ export default class Products extends React.Component {
         this.setState({value : [event.target.value]})
        
     }
-    componentDidUpdate(){
-        console.log(this.state.value)
-    }
+    
+   
     
    
     render() {
@@ -39,7 +40,7 @@ export default class Products extends React.Component {
                 </select>  
                  </div> 
             </div>   
-            <TableP/>
+            <TableP data={datap}/>
             </div>
            </div>
         </React.Fragment>

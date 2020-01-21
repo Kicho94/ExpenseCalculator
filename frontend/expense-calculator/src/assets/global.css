@@ -170,7 +170,9 @@ margin-right: auto;
     background:transparent;
     color: #575757;
     border: none;
-    font-size: 18px
+    font-size: 18px;
+    z-index: 5;
+    
 }
 
 
