@@ -4,41 +4,35 @@ export default class TableP extends React.Component {
     constructor(props){
         super(props)
         this.state= {
-            totalExpense : null
+            
         }
     }
     totalE = () => {
         var totalE = 0
-        for(let i=0;i<this.props.data.length;i++){
-          totalE += this.props.data[i].productPrice
+        for(i=0;i<this.props.data.lenght;i++){
+          totalE +  this.props.data.productPrice
         }
-        this.setState({totalExpense : totalE})
-    }
- 
-    componentDidMount(){
-        this.totalE()
+        return totalE
     }
 
     render(){
-            
-            const tableR  =  this.props.data.map((d)=>{
-             return <tr key={d.id}> 
+        const tableE  =  this.props.data.map((d)=>{
+             return <tr> 
             <td>{d.productName}</td>
             <td>{d.productType}</td>
             <td>{d.productDesc}</td>
             <td>{d.purchaseDate}</td>
             <td>{d.productPrice}</td>
-            <td>
-                <button><span><i className="far fa-edit"></i></span></button> 
-                <button><span><i className="far fa-trash-alt"></i></span></button>
-            </td>
+            
         </tr>
-        
+        const totalE = this.props.data.map((d)=>{
+            
+        })
+
+           
             })
         
-        
-        return ( 
-                    <React.Fragment>
+        return <React.Fragment>
             <div>
         <table className="products-table">
         <thead>
@@ -53,11 +47,9 @@ export default class TableP extends React.Component {
         </thead>
         <tbody>
             {tableR} 
-        <tr><td>{this.state.totalExpense}</td></tr>
         </tbody>
         </table>
 </div>
  </React.Fragment>
- )
     }
 }

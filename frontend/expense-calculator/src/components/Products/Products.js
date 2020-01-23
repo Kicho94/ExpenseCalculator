@@ -9,7 +9,7 @@ export default class Products extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : null,
+            value : "Year",
             
         }       
             }
@@ -40,7 +40,7 @@ export default class Products extends React.Component {
                 </select>  
                  </div> 
             </div>   
-            <TableP data={datap}/>
+            <TableP data={datap} />
             </div>
            </div>
         </React.Fragment>
