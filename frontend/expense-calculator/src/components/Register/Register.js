@@ -3,6 +3,13 @@ import './register.css'
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 
 export default class Register extends React.Component {
+	constructor(){
+		super()
+		this.state= {
+            
+    }
+		}
+	
 	
     render(){
         return(
@@ -36,7 +43,7 @@ export default class Register extends React.Component {
 		 </p> 
 		 <p className="input-holder">
 			<label className="field-label">Password</label>
-			<input type="text" cla	ssName="text-field"/>
+			<input type="text" className="text-field"/>
 	   </p> 
 	  <Link to='/products'><button className="main-button register-button">REGISTER</button></Link>
         </form>
