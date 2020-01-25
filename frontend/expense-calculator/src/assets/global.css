@@ -1,17 +1,14 @@
-html,body{
-    position: relative;
-    height: 100%;
-    width: 100%;
-}
 #root{
     height: 100%;
-    width: 100%;
-    margin: 0;
+    width: 100%;        
+ } 
+html,body{ 
+    height: 99%;
+    width: 99%;
     font-family: 'Roboto', 'sans-serif';
-    background: #E5EDF5; 
-    position: absolute;
+    background: #E5EDF5;   
       
-}
+} 
 .main-box form{
     background-color: #fff;
     padding: 30px;
@@ -60,13 +57,10 @@ html,body{
     margin: 30px 0px 0px 0px;   
 }
 .main-header {
-    width: 100%;    
+    width: 101%;    
     background: white;
     display: inline-flex;  
-    align-items: center;         
-    position: relative;
-    justify-content: space-between;
-   
+    justify-content: space-between;   
      
 }
 .avatar {
@@ -88,92 +82,7 @@ html,body{
     height: 40px;
     border-radius: 50%;     
 }
-.expenses-button {
-    font-size: 15px;
-    font-weight: bold;
-    background: transparent;
-    border: 2px solid #576574;
-    color: #576574;
-    border-radius: 5px;
-    text-align: center;
-    margin: 15px 10px 15px 15px;
-    padding: 10px 15px 10px 15px; 
-  
-        
-    }
-.products-button {
-        font-size: 15px;
-        font-weight: bold;
-        background: transparent;
-        border: 2px solid;
-        border-color: #1DD1A1;
-        border-radius: 5px;
-        text-align: center;
-        margin-left: 35px;
-        padding: 10px 15px 10px 15px;  
-        Color:  #1DD1A1
-                
-        }
-.products-header {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px auto -10px auto;
-    
-}
-.products-header h1 {
-margin-right: auto;
-}
 
-.filter {
-    display: inline-flex;
-    margin-left:auto;
-    
-}
-.filter p  {
-    margin-right: 10px;
-}
-.filter select {
-    Height: 35px;
-    Background: #fff;
-    Border: 2px solid;
-    Border-color: #C6C6C6;
-    color: #8D8D8D;
-    border-radius: 5px;
-}
-.products-table {
-    width: 90%;
-    border: 0px;
-    border-spacing: 0px 10px;   
-    margin: 0 auto 0 auto;
-}
-.products-table thead th {
-    font-size: 16px;
-    color: #404040;
-    padding-bottom: 15px;
-    border-bottom: 1px solid;
-    border-color: #707070;
-    text-align:center;  
-}
-
-.products-table tbody td {
-    padding: 20px;
-    font-size: 16px;
-    color: #575757;
-    background: #fff;  
-    text-align:center
-    
-    }
-
-.products-table tbody button{
-    background:transparent;
-    color: #575757;
-    border: none;
-    font-size: 18px;
-    
-    
-}
 
 
 

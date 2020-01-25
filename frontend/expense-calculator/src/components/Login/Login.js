@@ -18,7 +18,7 @@ export default class Login extends React.Component {
                  <input type="text" className="text-field"/>
             </p> 
             
-            <button className="main-button login-button">SIGN IN</button>
+            <Link to='/products'><button className="main-button login-button">SIGN IN</button></Link> 
         </form>
        <div className="onboarding-description">
            <p>Or if u don't have an account, <Link to='/register' style={{textDecoration: 'none'}}><span>Register.</span></Link></p>

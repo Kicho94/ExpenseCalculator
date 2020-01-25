@@ -1,0 +1,68 @@
+.mont-year {
+    font-size: 15px;
+    font-weight: bold;
+    background: #1dd1a1;
+    border: 2px solid;
+    border-color: #1DD1A1;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%;
+    padding: 10px 15px 10px 15px;  
+    Color:  #fff
+    
+}
+.mont-yearU {
+   font-size: 15px;
+    font-weight: bold;
+    background: transparent;
+    border: 2px solid;
+    border-color: #1DD1A1;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 35px;
+    padding: 10px 15px 10px 15px;  
+    Color:  #1DD1A1
+     
+     
+ }
+ /* .mont-yearU:active {
+    font-size: 15px;
+        font-weight: bold;
+        background: transparent;
+        border: 2px solid;
+        border-color: #1DD1A1;
+        border-radius: 5px;
+        text-align: center;
+        margin-left: 35px;
+        padding: 10px 15px 10px 15px;  
+        Color:  #1DD1A1
+        
+     
+ } */
+.expenses-header{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    margin: 20px auto -10px auto;
+}
+.buttons-div{
+    width: 27%;
+}
+.expenses-footer {
+    width: 100%;
+    height: 10%;
+    background: black;
+    bottom: 0;
+    position: fixed;
+    opacity: 50%;
+    color: white;
+    align-content: center;
+
+}
+.expenses-footerh1{
+    
+    
+    margin-top:1.7%;
+    margin-right: 6%;
+    text-align:  right;
+}

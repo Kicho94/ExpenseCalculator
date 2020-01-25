@@ -37,7 +37,7 @@ export default class Register extends React.Component {
 			<label className="field-label">Password</label>
 			<input type="text" className="text-field"/>
 	   </p> 
-            <button className="main-button register-button">REGISTER</button> 
+	   <Link to='/products'><button className="main-button register-button">REGISTER</button></Link>
         </form>
        <div className="onboarding-description">
            <p>Or if u already have an account, <Link to='/' style={{textDecoration: 'none'}}><a href="#" className="onboarding-description">Sign in</a>.</Link></p>

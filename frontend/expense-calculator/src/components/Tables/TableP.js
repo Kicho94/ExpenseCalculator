@@ -53,7 +53,6 @@ export default class TableP extends React.Component {
         </thead>
         <tbody>
             {tableR} 
-        <tr><td>{this.state.totalExpense}</td></tr>
         </tbody>
         </table>
 </div>

@@ -11,8 +11,8 @@ class  Header extends React.Component {
         return(
       <div className="main-header">
       <div>
-       <button className="products-button" ><Link to='/products' style={{ color: 'inherit', textDecoration: 'inherit'}}>PRODUCTS</Link></button>
-       <button className="expenses-button"><Link to='/expenses' style={{ color: 'inherit', textDecoration: 'inherit'}}>EXPENSES</Link></button>
+      <Link to='/products' style={{ color: 'inherit', textDecoration: 'inherit'}}> <button className="products-button" >PRODUCTS</button></Link>
+      <Link to='/expenses' style={{ color: 'inherit', textDecoration: 'inherit'}}> <button className="expenses-button">EXPENSES</button></Link>
        </div>
       <div className="avatar">
       <img className="image" src="https://d3q94h10rclvvz.cloudfront.net/sites/default/files/mediaobjects/gal_gadot_2_sdcc_2014_cropped.jpg"/>

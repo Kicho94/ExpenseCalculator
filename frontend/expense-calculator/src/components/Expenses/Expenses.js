@@ -1,18 +1,16 @@
 import React from 'react'
 import Header from '../Header/Header'
-import TableP from '../Tables/TableP'
-import './products.css'
+import TableE from '../Tables/TableE'
+import './expenses.css'
 import datap from '../../DataP'
-import {Link} from 'react-router-dom'
 
 
-
-export default class Products extends React.Component {
+export default class Expenses extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             value : "Year",
-            
+            totalExpense: null
         }       
             }
     
@@ -22,18 +20,31 @@ export default class Products extends React.Component {
        
     }
     
-   
+   componentDidMount(){
+    var totalE = 0
+    for(let i=0;i<datap.length;i++){
+      totalE += datap[i].productPrice
+    }
+    this.setState({totalExpense : totalE})
+   }
     
    
     render() {
+      
         return (<React.Fragment> 
                 <div id="products-container">
              <Header />
             <div id="products-background">
             <div className="products-header">            
-                 <div><h1>Products</h1></div>
+                <h1>Expenses</h1>
+                </div>  
+                <div className="expenses-header">
+                     <div className="buttons-div">
+                         <button className="mont-year">MONTHLY</button>
+                         <button className="mont-year">YEARLY</button>
+                     </div>
                  <div className="filter">                     
-                  <p>Filter by: </p>
+                  <p>Choose Month: </p>
                 <select value={this.state.value} onChange={this.changeV}>
                     <option value="year">Year</option>
                     <option value="highestPrice">Highest Price</option>
@@ -41,12 +52,19 @@ export default class Products extends React.Component {
                     <option value="latestPurchases">Latest Purchases</option>
                 </select>  
                  </div> 
-            </div>   
-            <TableP data={datap} />
-          
-            </div>
+                 </div> 
+                 <br></br>
+                 
+            <TableE data={datap} />
+            </div>           
            </div>
-          <div className="newp-button"><Link to="/newproduct"><button >NEW PRODUCT</button></Link></div>
+           <div className="expenses-footer">
+                <div className="expenses-footerh1">
+                    <h1>
+                    Total spent : {this.state.totalExpense} den.
+                </h1>
+                </div>
+                </div>     
         </React.Fragment>
         )
     }

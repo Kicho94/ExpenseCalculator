@@ -38,7 +38,172 @@ const datap = [
     purchaseDate:"10.12.2019",
     productPrice: 500,
     id:5
-}
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+{
+    productName:"Blazho",
+    productType:"Bot",
+    productDesc:"bezalkoholna",
+    purchaseDate:"10.12.2019",
+    productPrice: 500,
+    id:5
+},
+
 ]
 
 export default datap
+
+
+// html,body{
+ 
+//     height: 100%;
+//     width: 99.7%;
+//     font-family: 'Roboto', 'sans-serif';
+//     background: #E5EDF5; 
+    
+      
+// }
+//  #root{
+//     height: 100%;
+//     width: 100%;
+//     margin: 0;
+//     font-family: 'Roboto', 'sans-serif';
+//     background: #E5EDF5; 
+//     position: absolute; 
+       
+//  } 

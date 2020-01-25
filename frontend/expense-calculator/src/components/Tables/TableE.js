@@ -1,19 +1,15 @@
 import React from 'react'
 
-export default class TableP extends React.Component {
+export default class TableE extends React.Component {
     constructor(props){
         super(props)
         this.state= {
             
         }
     }
-    totalE = () => {
-        var totalE = 0
-        for(i=0;i<this.props.data.lenght;i++){
-          totalE +  this.props.data.productPrice
-        }
-        return totalE
-    }
+   
+ 
+    
 
     render(){
         const tableE  =  this.props.data.map((d)=>{
@@ -25,9 +21,7 @@ export default class TableP extends React.Component {
             <td>{d.productPrice}</td>
             
         </tr>
-        const totalE = this.props.data.map((d)=>{
-            
-        })
+       
 
            
             })
@@ -46,8 +40,8 @@ export default class TableP extends React.Component {
             </tr>
         </thead>
         <tbody>
-            {tableR} 
-        </tbody>
+            {tableE} 
+                </tbody>
         </table>
 </div>
  </React.Fragment>
