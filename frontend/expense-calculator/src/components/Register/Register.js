@@ -6,7 +6,8 @@ export default class Register extends React.Component {
 	
     render(){
         return(
-            <div id="register-container">
+			<React.Fragment>  
+		   <div id="register-container">
     <div className="main-box">
         <form>
             <p className="input-holder">
@@ -35,16 +36,18 @@ export default class Register extends React.Component {
 		 </p> 
 		 <p className="input-holder">
 			<label className="field-label">Password</label>
-			<input type="text" className="text-field"/>
+			<input type="text" cla	ssName="text-field"/>
 	   </p> 
-	   <Link to='/products'><button className="main-button register-button">REGISTER</button></Link>
+	  <Link to='/products'><button className="main-button register-button">REGISTER</button></Link>
         </form>
-       <div className="onboarding-description">
+       
+    </div>
+	
+</div>
+<div className="onboarding-description">
            <p>Or if u already have an account, <Link to='/' style={{textDecoration: 'none'}}><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
        </div>
-    </div>
-
-</div>
+</React.Fragment>
         )
         
     }
