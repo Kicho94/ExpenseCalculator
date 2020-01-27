@@ -25,6 +25,7 @@ api.get('/api/v1/renew', auth.renew);
 api.post('/api/v1/reset-link', auth.resetLink);
 api.post('/api/v1/reset-password', auth.resetPassword);
 api.post('/api/v1/change-password', auth.changePassword);
+api.post('/api/v1/confirm/:confirm_hash', auth.confirm)
 
 api.use(function(err, req, res, next) {
     if(err.name === 'UnauthorizedError'){
@@ -40,5 +41,5 @@ api.listen(8081, err => {
         console.log(err);
         return;
     }
-    console.log('Server started on port 8081');
+    console.log('Server started on port asdf');
 });

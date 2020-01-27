@@ -5,7 +5,8 @@ const createUser = {
     password:  "required|string|minLength:3",
     birth_date: "required|string",
     telephone: "required|integer|minLength:8",
-    counrty: "required|string"
+    country: "required|string"
+    
         
 }
 

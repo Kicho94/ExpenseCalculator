@@ -7,5 +7,10 @@
     },
     "jwt": {
         "key" : "kluch"
+    },
+
+    "mailer" : {
+        "key" : "kluch"
     }
+    
 }

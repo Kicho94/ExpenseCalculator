@@ -10,6 +10,9 @@ const User = mongoose.model(
         birth_date: Date,
         telephone: Number,
         counrty: String,
+        _created: Date,
+        confirm_hash: String,
+        confirmed: Boolean
         
     },
     {
@@ -40,7 +43,19 @@ const getUserPasswordByEmail = (email) => {
     });
 }
 
+const confirmUserAccount = (hash) => {
+    return new Promise((success, fail) => { 
+        User.update({confirm_hash: hash}, {confirmed:true}, (err) => {
+            if(err){
+                return fail(err);
+            }
+            return success();
+        })
+    })
+}
+
 module.exports = {
     createUser,
-    getUserPasswordByEmail
+    getUserPasswordByEmail,
+    confirmUserAccount
 }
