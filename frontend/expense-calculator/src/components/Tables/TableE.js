@@ -26,8 +26,7 @@ export default class TableE extends React.Component {
            
             })
         
-        return <React.Fragment>
-            <div>
+        return <div>
         <table className="products-table">
         <thead>
             <tr>
@@ -44,6 +43,7 @@ export default class TableE extends React.Component {
                 </tbody>
         </table>
 </div>
- </React.Fragment>
+            
+ 
     }
 }

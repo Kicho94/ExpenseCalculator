@@ -46,7 +46,7 @@ export default class Products extends React.Component {
           
             </div>
            </div>
-          <div className="newp-button"><Link to="/newproduct"><button >NEW PRODUCT</button></Link></div>
+          <div className="newp-button"><Link to="/newproduct"><button>  NEW PRODUCT</button></Link></div>
         </React.Fragment>
         )
     }

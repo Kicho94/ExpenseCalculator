@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 var jwt = require('express-jwt');
+var cors = require('cors');
 const config = require('../config/index.js');
 const db = require('../db/connection');
 const auth = require('../handlers/auth');
@@ -8,9 +9,11 @@ const auth = require('../handlers/auth');
 var c = config.getConfig("db");
 db.init(c);
 
+
 var api = express();
 
 api.use(bodyParser.json());
+api.use(cors());
 api.use(
     jwt( {secret: config.getConfig('jwt').key} )
     .unless(
