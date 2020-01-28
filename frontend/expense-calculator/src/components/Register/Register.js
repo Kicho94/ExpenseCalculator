@@ -66,8 +66,8 @@ export default class Register extends React.Component {
 			})
 			.catch((error) => {
 				
-				console.error('Error:', error);
 				window.location.reload();
+				console.error('Error:', error);
 		}) 
 		}
 	}
