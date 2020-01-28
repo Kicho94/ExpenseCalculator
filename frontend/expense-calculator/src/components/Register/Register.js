@@ -63,6 +63,7 @@ export default class Register extends React.Component {
 			.then((data) => {
 				console.log('Success:', data);
 				this.setState({redirect : true})
+				alert('User successfuly created!')
 			})
 			.catch((error) => {
 				

@@ -37,7 +37,7 @@ const register = (req, res) => {
                         sgMail.setApiKey(config.getConfig('mailer').key);
                         const msg = {
                             to : req.body.email,
-                            from : 'kicho@gmail.com',
+                            from : 'kspasovski1@gmail.com',
                             subject : 'Thanks for registering',
                             text : 'Thanks for registering',
                             html : `<a href = "http://localhost:8081/api/v1/confirm/${confirm_hash}>Click here to confirm your account</a>`,
