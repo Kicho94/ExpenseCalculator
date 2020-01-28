@@ -13,10 +13,11 @@ const register = (req, res) => {
     var v = new validator.Validator(req.body, vUsers.createUser);
     v.check()
     .then(matched => {
-        if(matched) {
-            mUsers.getUserPasswordByEmail(req.body.email)
-            .then((ed) => {
-                if(!ed) {
+        if(matched){
+            return  mUsers.getUserPasswordByEmail(req.body.email)
+            .then((ed)=> {
+            if (ed === undefined){
+                     console.log('im in')
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(req.body.password, salt, function(err, hash) {
                             if(err){
@@ -24,7 +25,7 @@ const register = (req, res) => {
                                 return;
                             }
                     var confirm_hash = randomstring.generate({
-                        length:10,
+                        length: 30,
                         charset: 'alphanumeric'
                     });
                        mUsers.createUser(
@@ -33,7 +34,7 @@ const register = (req, res) => {
                             confirm_hash : confirm_hash,
                             confirmed : false
                         });
-                        sgMail.setApiKey(config.getConfig(mailer.key));
+                        sgMail.setApiKey(config.getConfig('mailer').key);
                         const msg = {
                             to : req.body.email,
                             from : 'bojang@gmail.com',
@@ -55,7 +56,7 @@ const register = (req, res) => {
             })
            
             
-        } else {
+        }else {
             throw new Error('Validation failed');
             
         }
@@ -74,6 +75,7 @@ const login = (req, res) => {
     
     mUsers.getUserPasswordByEmail(req.body.email)
     .then((data)=> {
+        console.log(data)
         bcrypt.compare(req.body.password, data.password, function(err, rez) {
             if(err){
                 return res.status(500).send("could not compare password");
@@ -86,6 +88,7 @@ const login = (req, res) => {
                     email: data.email
                 };
                 var token = jwt.sign(tokenData, config.getConfig('jwt').key);
+                    
                 return res.status(200).send({jwt: token})
             }
             return res.status(200).send('not found');

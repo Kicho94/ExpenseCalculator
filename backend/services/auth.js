@@ -44,5 +44,5 @@ api.listen(8081, err => {
         console.log(err);
         return;
     }
-    console.log('Server started on port asdf');
+    console.log('Server started on port 8081');
 });

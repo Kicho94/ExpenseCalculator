@@ -1,7 +1,7 @@
 import React from 'react'
 import './register.css'
-import {BrowserRouter as  Route, Link, Switch} from 'react-router-dom'
-import {Redirect} from 'react-router-dom'
+import {BrowserRouter as  Route, Link, Switch, Redirect} from 'react-router-dom'
+import axios from 'axios'
 
 export default class Register extends React.Component {
 	constructor(){
@@ -14,10 +14,13 @@ export default class Register extends React.Component {
 			telephone : null,
 			country : "",
 			password : "",
+			redirect : false
 		};
 		this.saveUser = this.saveUser.bind(this)
 		this.registerUser = this.registerUser.bind(this);
 	}
+
+	
 
 	saveUser = (event) => {
 		this.setState({[event.target.id] : event.target.value})
@@ -56,24 +59,25 @@ export default class Register extends React.Component {
 				_created: new Date()
 			};
 
-			fetch('http://127.0.0.1:8081/api/v1/register', {
-				method: 'POST', 
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
-			})
-			.then((response) => response.json())
+			axios.post('http://127.0.0.1:8081/api/v1/register',data)
 			.then((data) => {
 				console.log('Success:', data);
+				this.setState({redirect : true})
 			})
 			.catch((error) => {
+				
 				console.error('Error:', error);
-			});
-		} 
+				window.location.reload();
+		}) 
+		}
 	}
 	
+
     render(){
+		if(this.state.redirect){
+			return <Redirect to="/" />
+		}
+		
         return (
 			<>  
 				<div id="register-container">
@@ -92,7 +96,7 @@ export default class Register extends React.Component {
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Date of Birth</label>
-							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser}/>
+							<input type="date" className="text-field" id="birth_date" onChange={this.saveUser}/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Telephone</label>
@@ -110,7 +114,7 @@ export default class Register extends React.Component {
 					</div>
 				</div>
 				<div className="onboarding-description">
-					<p>Or if u already have an account, <Redirect to='/' style={{textDecoration: 'none'}}><a href="#" className="onboarding-description">Sign in</a>.</Redirect></p>
+					<p>Or if u already have an account, <Link to='/' style={{textDecoration: 'none'}}><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
 				</div>
 			</>
         );
