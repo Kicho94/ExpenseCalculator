@@ -2,7 +2,6 @@ import React from 'react'
 import Header from '../Header/Header'
 import TableP from '../Tables/TableP'
 import './products.css'
-import datap from '../../DataP'
 import {Link} from 'react-router-dom'
 
 
@@ -11,18 +10,38 @@ export default class Products extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : "Year",
-            
+            value : "purchase_date:1",
+            data : {}
         }       
-            }
+            }   
     
     changeV = (event) => {
+                this.setState({value : [event.target.value]})
+                
+           }
+    
+    getData = () => {
+        fetch(`http://127.0.0.1:8080/api/v1/products?sort=${this.state.value}`,
+         {
+             method : 'get',
+             headers: {
+                         'Content-Type': 'application/json',
+                         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                      }
+         }
+         )
+         .then((response) => response.json())
+        .then((data) => {
+            this.setState({ data : data})
+            console.log(data)
+        });
         
-        this.setState({value : [event.target.value]})
-       
+     }
+     
+    componentDidMount(){
+        this.getData()
     }
     
-   
     
    
     render() {
@@ -35,14 +54,14 @@ export default class Products extends React.Component {
                  <div className="filter">                     
                   <p>Filter by: </p>
                 <select value={this.state.value} onChange={this.changeV}>
-                    <option value="year">Year</option>
-                    <option value="highestPrice">Highest Price</option>
-                    <option value="lowestPrice">Lowest Price</option>
-                    <option value="latestPurchases">Latest Purchases</option>
+                    <option value="purchase_date:1">Year</option>
+                    <option value="product_price:1">Highest Price</option>
+                    <option value="product_price:-1">Lowest Price</option>
+                    <option value="purchase_date:-1">Latest Purchases</option>
                 </select>  
                  </div> 
             </div>   
-            <TableP data={datap} />
+            <TableP data={this.state.data} />
           
             </div>
            </div>

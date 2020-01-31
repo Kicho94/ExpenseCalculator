@@ -9,10 +9,11 @@ const getAll = (req, res) => {
     let sort = {};
     
     
-    if(req.query.productname != undefined){
-        q.productname = req.query.productname === 'true' ? true : false;
+    if(req.query.year != undefined){
+        q.year = req.query.year;
+    }   
         
-    }
+    
     if(req.query.ime != undefined){
             q.ime = req.query.ime 
       
@@ -34,10 +35,12 @@ const getAll = (req, res) => {
     }
 
     if(req.query.sort != undefined){
-      let sortable = ['godina', 'ime']
+      let sortable = ['purchase_date', 'product_price']
       let sq = req.query.sort.split(":")
       if(sortable.indexOf(sq[0]) > -1){
-          sort[sq[0]] = sq[1] =='desc' ? -1 : 1;
+          if(sq[1] == 1 || -1){
+                 sort[sq[0]] = sq[1] 
+          }
       }
 
     }
