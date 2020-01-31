@@ -20,13 +20,13 @@ export default class Expenses extends React.Component {
        
     }
     
-   componentDidMount(){
-    var totalE = 0
-    for(let i=0;i<datap.length;i++){
-      totalE += datap[i].productPrice
-    }
-    this.setState({totalExpense : totalE})
-   }
+//    componentDidMount(){
+//     var totalE = 0
+//     for(let i=0;i<datap.length;i++){
+//       totalE += datap[i].productPrice
+//     }
+//     this.setState({totalExpense : totalE})
+//    }
     
    
     render() {
@@ -45,15 +45,16 @@ export default class Expenses extends React.Component {
                      </div>
                  <div className="filter">                     
                   <p>Choose Month: </p>
-                <select value={this.state.value} onChange={this.changeV}>
+                {/* <select value={this.state.value} onChange={this.changeV}>
                     <option value="year">Year</option>
                     <option value="highestPrice">Highest Price</option>
                     <option value="lowestPrice">Lowest Price</option>
                     <option value="latestPurchases">Latest Purchases</option>
-                </select>  
+                </select>   */}
+                <input type="month"/>
+                 </div>     
                  </div> 
-                 </div> 
-                 <br></br>
+                 <br/>
                  
             <TableE data={datap} />
             </div>           
@@ -62,7 +63,7 @@ export default class Expenses extends React.Component {
                 <div className="expenses-footerh1">
                     <h1>
                     Total spent : {this.state.totalExpense} den.
-                </h1>
+                    </h1>
                 </div>
                 </div>     
         </React.Fragment>

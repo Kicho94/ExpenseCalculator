@@ -39,6 +39,7 @@ export default class Login extends React.Component {
             .then(d=>{
                 
                 localStorage.setItem('jwt', d.jwt);
+                localStorage.setItem('fullname', d.fullname)
                 this.setState({redirect : true})
                 
             })

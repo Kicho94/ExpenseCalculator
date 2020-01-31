@@ -87,9 +87,10 @@ const login = (req, res) => {
                     full_name : `${data.first_name} ${data.last_name}`,
                     email: data.email
                 };
+                
                 var token = jwt.sign(tokenData, config.getConfig('jwt').key);
                     
-                return res.status(200).send({jwt: token})
+                return res.status(200).send({jwt: token, fullname :`${data.first_name} ${data.last_name}`} )
             }
             return res.status(200).send('not found');
         });
