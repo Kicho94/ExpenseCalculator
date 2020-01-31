@@ -11,14 +11,15 @@ export default class TableP extends React.Component {
     render(){
       console.log(this.props.data);
       var tableR = null;
-
+     
       if(this.props.data.length > 0){
+          var date =  Date.parse
            tableR  =  this.props.data.map((d)=> {
            return <tr key={d.id}> 
           <td>{d.product_name}</td>
           <td>{d.product_type}</td>
           <td>{d.product_desc}</td>
-          <td>{d.purchase_date}</td>
+          <td>{new Date(d.purchase_date).toISOString().substring(0, 10)}</td>
           <td>{d.product_price}</td>
           <td>
               <button><span><i className="far fa-edit"></i></span></button> 

@@ -10,15 +10,19 @@ export default class Products extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : "purchase_date:1",
+            value : "purchase_date:-1",
             data : {}
         }       
             }   
     
     changeV = (event) => {
-                this.setState({value : [event.target.value]})
-                
-           }
+         this.setState(
+            {
+                 value : [event.target.value]
+            }, 
+                this.getData);         
+            
+            }
     
     getData = () => {
         fetch(`http://127.0.0.1:8080/api/v1/products?sort=${this.state.value}`,
@@ -33,7 +37,7 @@ export default class Products extends React.Component {
          .then((response) => response.json())
         .then((data) => {
             this.setState({ data : data})
-            console.log(data)
+            
         });
         
      }
@@ -45,7 +49,7 @@ export default class Products extends React.Component {
     
    
     render() {
-        return (<React.Fragment> 
+            return (<React.Fragment> 
                 <div id="products-container">
              <Header />
             <div id="products-background">
@@ -54,10 +58,10 @@ export default class Products extends React.Component {
                  <div className="filter">                     
                   <p>Filter by: </p>
                 <select value={this.state.value} onChange={this.changeV}>
-                    <option value="purchase_date:1">Year</option>
-                    <option value="product_price:1">Highest Price</option>
-                    <option value="product_price:-1">Lowest Price</option>
-                    <option value="purchase_date:-1">Latest Purchases</option>
+                    <option value="purchase_date:-1">Newest Purchase</option>
+                    <option value="product_price:-1">Highest Price</option>
+                    <option value="product_price:1">Lowest Price</option>
+                    <option value="purchase_date:1">Latest Purchases</option>
                 </select>  
                  </div> 
             </div>   
