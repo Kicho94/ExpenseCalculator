@@ -52,7 +52,7 @@ export default class Register extends React.Component {
 				first_name : this.state.first_name,
 				last_name : this.state.last_name,
 				email : this.state.email,
-				birth_date : this.state.birth_date,
+				birth_date : new Date(this.state.birth_date),
 				telephone : this.state.telephone,
 				country : this.state.country,
 				password : this.state.password,
@@ -97,11 +97,11 @@ export default class Register extends React.Component {
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Date of Birth</label>
-							<input type="date" className="text-field" id="birth_date" onChange={this.saveUser}/>
+							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser}/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Telephone</label>
-							<input type="number" className="text-field" id="telephone" onChange={this.saveUser}/>
+							<input type="text" className="text-field" id="telephone" onChange={this.saveUser}/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Country</label>
