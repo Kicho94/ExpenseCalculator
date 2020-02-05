@@ -62,9 +62,9 @@ const Products = mongoose.model(
         });
     }
 
-    const replace = (id, userID, data) => {
+    const replace = (id, data) => {
         return new Promise ((success, fail) =>{
-            Products.updateOne({_id:id, user_id: userID}, data, err =>{
+            Products.updateOne({_id:id}, data, err =>{
                 if(err){
                     return fail(err)
                 }
@@ -73,16 +73,7 @@ const Products = mongoose.model(
         });
     };
 
-    const update = (id, userID, data) => {
-        return new Promise((success, fail) =>{
-            Products.updateOne({_id:id, user_id: userID}, data, err=>{
-                if(err){
-                    return fail(err);
-                };
-                return success();
-            });
-        });
-    };
+    
 
 
     module.exports = {
@@ -91,5 +82,4 @@ const Products = mongoose.model(
         save,
         remove,
         replace,
-        update
-    }
+            }

@@ -93,19 +93,20 @@ const save = (req, res) => {
 
 const replace = (req, res) => {
     var data = req.body;
+    console.log(data)
     let er = 0;
-    if(data.product_name == undefined || data.ime.length == 0){er++;};
-    if(data.product_desc == undefined || data.zanr.length == 0){er++;};
-    if(data.product_type == undefined || data.akteri.length == 0){er++;};
-    if(data.purchase_date == undefined || data.godina.length == 0){er++;};
-    if(data.product_price == undefined || data.rezija.length == 0){er++;};
+    if(data.product_name == undefined || data.ime.length == 0){er++;}
+    if(data.product_desc == undefined || data.zanr.length == 0){er++;}
+    if(data.product_type == undefined || data.akteri.length == 0){er++;}
+    if(data.purchase_date == undefined || data.godina.length == 0){er++;}
+    if(data.product_price == undefined || data.rezija.length == 0){er++;}
     if(er == 0){
-    mProducts.replace(req.params.id, req.user.id, req.body)
+    mProducts.replace(req.params.id, req.body)
    .then(()=> {
     res.status(204).send();
    })
    .catch(err=>{
-res.status(500).send(err);
+res.status(500).send('FUCKOFF');
    });
 } else {
     res.status(400).send('Bad Request')
@@ -113,11 +114,14 @@ res.status(500).send(err);
 };
 
 const update = (req, res) => {
-    mProducts.update(req.params.id, req.user.id, req.body)
+    
+    mProducts.replace(req.params.id, req.body)
     .then(()=> {
         res.status(204).send();
+        console.log("Product Updated")
     })
     .catch(err =>{
+        console.log(err)
         res.status(500).send(err)
     });
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 import Header from '../Header/Header'
 import '../NewProduct/NewProduct.css'
 import {BrowserRouter as  Link, Redirect} from 'react-router-dom'
@@ -23,12 +23,13 @@ export default class NewProduct extends React.Component {
 
 
     createProduct = () => {
+        
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,
             product_type: this.state.product_type,
-            purchase_date: this.state.purchase_date,
-            product_price: this.state.product_price,
+            purchase_date: new Date(this.state.purchase_date),
+            product_price: Number(this.state.product_price),
             _created: new Date()
         }
         fetch(
@@ -77,18 +78,20 @@ export default class NewProduct extends React.Component {
             </p> 
 
             <p className="input-holder">
-                 <label className="field-label">Product Description</label>
-                 <input type="text" className="text-field" id="product_desc" onChange={this.saveProduct}/>
-			</p> 
-
-			<p className="input-holder">
 				<label className="field-label">Product Type</label>
 				<input type="text" className="text-field" id="product_type" onChange={this.saveProduct}/>
 		    </p> 
 
+
+            <p className="input-holder">
+                 <label className="field-label">Product Description</label>
+                 <input type="text" className="text-field" id="product_desc" onChange={this.saveProduct}/>
+			</p> 
+
+			
 		    <p className="input-holder">
 			<label className="field-label">Purchase Date</label>
-			<input type="date" className="text-field" id="purchase_date" onChange={this.saveProduct}/>
+			<input type="text" className="text-field" id="purchase_date" onChange={this.saveProduct} placeholder="Year-Month-Day"/>
 		    </p> 
 
 		 <p className="input-holder">

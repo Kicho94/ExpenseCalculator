@@ -97,7 +97,7 @@ export default class Register extends React.Component {
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Date of Birth</label>
-							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser}/>
+							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser} placeholder="Month-Day-Year"/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Telephone</label>

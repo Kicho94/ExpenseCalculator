@@ -1,30 +1,45 @@
 import React from 'react'
+import {  Redirect } from 'react-router-dom'
+
+
 
 export default class TableP extends React.Component {
     constructor(props){
         super(props)
         this.state= {
-            totalExpense : null
+          redirect : false,
+          id : undefined
         }
     }
+   showModal = (d) =>{
+    this.props.getId(d);
+    this.props.showModal()
+   }
+  
+   redirect = (id) => {
+    this.setState({id : id}, ()=>{this.setState({redirect : true})})
+    
+  }
   
     render(){
-      console.log(this.props.data);
+        if (this.state.redirect){
+            return <Redirect to = {`/editproduct/${this.state.id}`} />
+        }
+      
       var tableR = null;
      
       if(this.props.data.length > 0){
-          var date =  Date.parse
            tableR  =  this.props.data.map((d)=> {
-           return <tr key={d.id}> 
-          <td>{d.product_name}</td>
-          <td>{d.product_type}</td>
-          <td>{d.product_desc}</td>
-          <td>{new Date(d.purchase_date).toISOString().substring(0, 10)}</td>
-          <td>{d.product_price}</td>
-          <td>
-              <button><span><i className="far fa-edit"></i></span></button> 
-              <button><span><i className="far fa-trash-alt"></i></span></button>
-          </td>
+           return <tr key={d._id}> 
+            <td>{d.product_name}</td>
+            <td>{d.product_type}</td>
+            <td>{d.product_desc}</td>
+            <td>{new Date(d.purchase_date).toISOString().substring(0, 10)}</td>
+            <td>{d.product_price}</td>
+            <td>
+              <button onClick={()=> {this.redirect(d._id)}}> <span> <i className="far fa-edit"></i> </span> </button> 
+              <button onClick={()=> {this.showModal(d._id)}}> <span> <i className="far fa-trash-alt" ></i> </span> </button>
+            </td>
       </tr>
         })
       }else if(this.props.data.length ==  0 || undefined){
@@ -36,9 +51,11 @@ export default class TableP extends React.Component {
         }; 
             
         return ( 
-                    <React.Fragment>
+              <React.Fragment>
+        
             <div>
-        <table className="products-table">
+            
+    <table className="products-table">   
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -52,7 +69,7 @@ export default class TableP extends React.Component {
         <tbody>
             {tableR} 
         </tbody>
-        </table>
+    </table>
 </div>
  </React.Fragment>
  )

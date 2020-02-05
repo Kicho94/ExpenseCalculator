@@ -3,7 +3,7 @@ import Header from '../Header/Header'
 import TableP from '../Tables/TableP'
 import './products.css'
 import {Link} from 'react-router-dom'
-
+import DeleteModal from '../Tables/DeleteModal'
 
 
 export default class Products extends React.Component {
@@ -11,9 +11,12 @@ export default class Products extends React.Component {
         super(props);
         this.state = {
             value : "purchase_date:-1",
-            data : {}
+            data : {},
+            show: null,
+            id : undefined
         }       
-            }   
+            }
+       
     
     changeV = (event) => {
          this.setState(
@@ -34,12 +37,49 @@ export default class Products extends React.Component {
                       }
          }
          )
-         .then((response) => response.json())
+        .then((response) => response.json())
         .then((data) => {
             this.setState({ data : data})
             
+        })
+        .catch((err)=> {
+            console.log(err)
         });
         
+     }
+     deleteProduct = () => {
+     
+        fetch(
+         `http://127.0.0.1:8080/api/v1/products/${this.state.id}`, 
+     {
+         method: 'delete',
+         headers: {
+             'Content-Type': 'application/json',
+             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                 }
+     }
+     ) 
+    .then((response) => {
+        console.log(response)
+        alert('Product successfully deleted!')
+        window.location.reload();
+     })
+    .catch((err)=> {
+       console.log(err)
+       alert('Something went wrong!')
+   });
+      }
+
+     cancel = () => {
+         this.setState({ show : null})
+     }
+    
+     getId = (id) => {
+        this.setState({id : id})
+     }
+
+     showModal = () => {
+         this.setState({ show :  <DeleteModal  cancel = {this.cancel} deleteProduct={this.deleteProduct}/>})
      }
      
     componentDidMount(){
@@ -65,11 +105,12 @@ export default class Products extends React.Component {
                 </select>  
                  </div> 
             </div>   
-            <TableP data={this.state.data} />
-          
+           
+            <TableP data={this.state.data} showModal = {this.showModal} getId={this.getId}/>
+            {this.state.show}
             </div>
            </div>
-          <div className="newp-button"><Link to="/newproduct"><button>  NEW PRODUCT</button></Link></div>
+          <div className="newp-button"><Link to="/newproduct"><button>NEW PRODUCT</button></Link></div>
         </React.Fragment>
         )
     }
