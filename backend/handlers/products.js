@@ -9,28 +9,19 @@ const getAll = (req, res) => {
     let sort = {};
     
     
-    if(req.query.year != undefined){
-        q.year = req.query.year;
-    }   
-        
-    
-    if(req.query.ime != undefined){
-            q.ime = req.query.ime 
-      
+    if(req.query.purchase_date_from != undefined){
+        if(q.purchase_date == undefined){
+            q.purchase_date = {};
         }
-    if(req.query.godina_from != undefined){
-        if(q.godina == undefined){
-            q.godina = {};
-        }
-        q.godina.$gte = new Date(Number (req.query.godina_from));
+        q.purchase_date.$gte = new Date(Number(req.query.purchase_date_from));
 
     }
 
-    if(req.query.godina_to != undefined){
-        if(q.godina == undefined){
-            q.godina = {};
+    if(req.query.purchase_date_to != undefined){
+        if(q.purchase_date == undefined){
+            q.purchase_date = {};
         }
-        q.godina.$lt = new Date(Number(req.query.godina_to));
+        q.purchase_date.$lt = new Date(Number(req.query.purchase_date_to));
         
     }
 

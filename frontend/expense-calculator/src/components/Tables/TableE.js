@@ -12,18 +12,18 @@ export default class TableE extends React.Component {
     
 
     render(){
-        console.log(this.props.data.length)
+       
         var tableE = null;
 
       if(this.props.data.length > 0){
-        console.log(this.props.data.length)
+        
            tableE  =  this.props.data.map((d)=>{
            return <tr key={d.id}> 
-                    <td>{d.productName}</td>
-                    <td>{d.productType}</td>
-                    <td>{d.productDesc}</td>
-                    <td>{d.purchaseDate}</td>
-                    <td>{d.productPrice}</td>
+                    <td>{d.product_name}</td>
+                    <td>{d.product_type}</td>
+                    <td>{d.product_desc}</td>
+                    <td>{d.purchase_date}</td>
+                    <td>{d.product_price}</td>
                   </tr>
         })
       }else if(this.props.data.length == undefined){

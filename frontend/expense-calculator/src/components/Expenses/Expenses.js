@@ -2,61 +2,183 @@ import React from 'react'
 import Header from '../Header/Header'
 import TableE from '../Tables/TableE'
 import './expenses.css'
-import datap from '../../DataP'
 
 
 export default class Expenses extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : "Year",
-            totalExpense: null
+            vMonth : 'Choose Month',
+            dataY : [],
+            data : {},
+            totalExpense : undefined,
+            vYear : 'Choose Year',
+            style : []  
         }       
             }
-    
+    totalExpense = () => {
+        var totalExpenses = 0
+        for(let i = 0; i < this.state.data.length; i++){
+            totalExpenses += this.state.data[i].product_price
+        }
+        this.setState({totalExpense : totalExpenses})
+        //funkcija sto sumira ceni
+    } 
+
+
     changeV = (event) => {
         
-        this.setState({value : [event.target.value]})
+        this.setState({vMonth : [ event.target.value]}, this.getSortedDate );
+       
        
     }
+    changeVY = (event) => {
+        
+        this.setState(
+            {vYear : [event.target.value]}, this.getSortedDate )
+        }         
+        
+    getDateByYear = () => {
+        var yearNumber = Number(this.state.vYear) + 1
+        yearNumber = yearNumber.toString()
+        
+        const dateStart = new Date(`${this.state.vYear}-1-1`).getTime()
+        const dateEnd = new Date(`${yearNumber}-1-1`).getTime()
+        
+
+        fetch(`http://127.0.0.1:8080/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
+        {
+            method : 'GET',
+            headers :{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            }
+        })
+        .then(response => response.json())
+        .then((data)=> {
+            for(let i = 0; i < data.length; i++){
+                if(this.state.style.indexOf(new Date(data[i].purchase_date).getMonth()+1) == -1){
+                     this.setState({style : [...this.state.style, new Date(data[i].purchase_date).getMonth()+1 ]})
+                }
+            } 
+        })
+    }
     
-//    componentDidMount(){
-//     var totalE = 0
-//     for(let i=0;i<datap.length;i++){
-//       totalE += datap[i].productPrice
-//     }
-//     this.setState({totalExpense : totalE})
-//    }
+
+    getSortedDate = () =>{  
+        //funkcija koja zema sortirana data za odreden mesec i godina
+        var monthTo = Number(this.state.vMonth) + 1
+        monthTo = monthTo.toString()
+        const dateStart = new Date(`${this.state.vYear}-${this.state.vMonth}-1`).getTime()
+        const dateEnd = new Date(`${this.state.vYear}-${monthTo}-1`).getTime()
+       
+        
+
+
+        fetch(`http://127.0.0.1:8080/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
+        {
+            method : 'GET',
+            headers :{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            }
+        })
+        .then(response => response.json())
+        .then((data)=> {
+            this.setState({data : data})
+            this.totalExpense()
+            this.getDateByYear()
+        })
+        .then(()=> {this.setState({style : ''})})
+        
+        .catch(err=> console.log(err))
+        
+        
+       
+    }
+
+
+    getAlldata = () => { fetch('http://127.0.0.1:8080/api/v1/products?sort=purchase_date:-1',
+    {
+        method : 'get',
+        headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                }
+    }
+    )
+    .then(response => response.json())
+    .then((data)  => {
+        
+        for(let i = 0; i < data.length; i++){
+        if(this.state.dataY.indexOf(data[i].purchase_date.substring(0,4)) == -1)
+               this.setState({dataY : [...this.state.dataY, data[i].purchase_date.substring(0,4)]})
+
+    }
     
-   
+    this.setState({data : data})
+    this.totalExpense()
+    
+    })
+    .catch(err => console.log(err))
+    }
+    
+    
+    componentDidMount(){
+        this.getAlldata()
+        }
+     
+
+
     render() {
-      
+        
+      var year = null
+       if(this.state.dataY.length > 0) {  
+       year = this.state.dataY.map(element => {
+      return <option value={element}>{element}</option>
+      })
+    } 
         return (<React.Fragment> 
                 <div id="products-container">
              <Header />
-            <div id="products-background">
-            <div className="products-header">            
-                <h1>Expenses</h1>
+<div id="products-background">
+                <div className="products-header">            
+                         <h1>Expenses</h1>
                 </div>  
-                <div className="expenses-header">
-                     <div className="buttons-div">
+        <div className="expenses-header">
+                    <div className="buttons-div">
                          <button className="mont-year">MONTHLY</button>
                          <button className="mont-year">YEARLY</button>
-                     </div>
-                 <div className="filter">                     
-                  <p>Choose Month: </p>
-                {/* <select value={this.state.value} onChange={this.changeV}>
-                    <option value="year">Year</option>
-                    <option value="highestPrice">Highest Price</option>
-                    <option value="lowestPrice">Lowest Price</option>
-                    <option value="latestPurchases">Latest Purchases</option>
-                </select>   */}
-                <input type="month"/>
-                 </div>     
-                 </div> 
+                    </div>  
+            <div className="filter">                     
+                  <p>Choose Month: </p> 
+                            <select value={this.state.vMonth} onChange={this.changeV}>
+                                    <option value="Choose Month" className={1==1 ? "red" : "green"}>Choose Month</option>
+                                    <option value="1" className={this.state.style.indexOf(1) > -1 ? "green" : "red"}>January</option>
+                                    <option value="2" className={this.state.style.indexOf(2) > -1 ? "green" : "red"}>February</option>
+                                    <option value="3" className={this.state.style.indexOf(3) > -1 ? "green" : "red"}>March</option>
+                                    <option value="4" className={this.state.style.indexOf(4) > -1 ? "green" : "red"}>April</option>
+                                    <option value="05" className={this.state.style.indexOf(5) > -1 ? "green" : "red"}>May</option>
+                                    <option value="6" className={this.state.style.indexOf(6) > -1 ? "green" : "red"}>June</option>
+                                    <option value="7" className={this.state.style.indexOf(7) > -1 ? "green" : "red"}>July</option>
+                                    <option value="8" className={this.state.style.indexOf(8) > -1 ? "green" : "red"}>August</option>
+                                    <option value="9" className={this.state.style.indexOf(9) > -1 ? "green" : "red"}>September</option>
+                                    <option value="10" className={this.state.style.indexOf(10) > -1 ? "green" : "red"}>October</option>
+                                    <option value="11" className={this.state.style.indexOf(11) > -1 ? "green" : "red"}>November</option>
+                                    <option value="12" className={this.state.style.indexOf(12) > -1 ? "green" : "red"}>December</option>
+                            </select>  
+            </div> 
+            <div className="filter">                     
+                  <p>Choose Year: </p>
+                <select value={this.state.vYear} onChange={this.changeVY}>
+                    <option value="Choose Year">Choose Year</option>
+                  {year}
+                </select>  
+            </div>    
+        </div> 
                  <br/>
                  
-            <TableE data={datap} />
+            <TableE data={this.state.data} />
             </div>           
            </div>
            <div className="expenses-footer">

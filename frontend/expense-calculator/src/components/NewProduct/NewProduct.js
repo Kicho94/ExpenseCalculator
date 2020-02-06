@@ -99,7 +99,7 @@ export default class NewProduct extends React.Component {
 			<input type="number" className="text-field" min="0" id="product_price" onChange={this.saveProduct}/>
 		 </p> 
 
-	    <button className="main-button register-button" onClick={this.createProduct}>REGISTER</button>
+	    <button className="main-button register-button" onClick={this.createProduct}>CREATE NEW PRODUCT</button>
              
     </div>
 

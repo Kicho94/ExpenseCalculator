@@ -29,13 +29,13 @@ export default class Products extends React.Component {
     
     getData = () => {
         fetch(`http://127.0.0.1:8080/api/v1/products?sort=${this.state.value}`,
-         {
-             method : 'get',
-             headers: {
-                         'Content-Type': 'application/json',
-                         'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-                      }
-         }
+            {
+                method : 'get',
+                headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+                        }
+            }
          )
         .then((response) => response.json())
         .then((data) => {
@@ -98,10 +98,10 @@ export default class Products extends React.Component {
                  <div className="filter">                     
                   <p>Filter by: </p>
                 <select value={this.state.value} onChange={this.changeV}>
-                    <option value="purchase_date:-1">Newest Purchase</option>
+                    <option value="purchase_date:-1">Latest Purchase</option>
                     <option value="product_price:-1">Highest Price</option>
                     <option value="product_price:1">Lowest Price</option>
-                    <option value="purchase_date:1">Latest Purchases</option>
+                    <option value="purchase_date:1">Oldest Purchases</option>
                 </select>  
                  </div> 
             </div>   
