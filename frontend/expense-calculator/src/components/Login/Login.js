@@ -18,7 +18,8 @@ export default class Login extends React.Component {
             this.setState({[event.target.id] : event.target.value})
         }
 
-        login = () =>{
+        login = (e) =>{
+            
             var data = {
                 email : this.state.email,
                 password : this.state.password,
@@ -46,6 +47,7 @@ export default class Login extends React.Component {
                 alert('Your username or password is incorrect');
                 window.location.reload()
             })
+    
         }
         
     render(){
@@ -59,17 +61,16 @@ export default class Login extends React.Component {
         
             <p className="input-holder">
              <label className="field-label">E-mail</label>
-             <input type="text" className="text-field" id="email" onChange={this.saveUser}/>
+             <input type="text" className="text-field" id="email" onChange={this.saveUser} onKeyDown={ (event) => {if(event.key === 'Enter'){this.login()}}}/>
             </p>   
             <p className="input-holder">
                  <label className="field-label">Password</label>
-                 <input type="password" className="text-field" id="password" onChange={this.saveUser}/>
-            </p> 
-            
-            <button className="main-button login-button" onClick={this.login}>SIGN IN</button>
-        
+                 <input type="password" className="text-field" id="password" onChange={this.saveUser} onKeyDown={ (event) => {if(event.key === 'Enter'){this.login()}}}/>
+                 </p>   
+                 <button className="main-button login-button" onClick={this.login}>SIGN IN</button>    
+
        <div className="onboarding-description">
-           <p>Or if u don't have an account, <Link to='/register'><span className="onboarding-description">Register.</span></Link></p>
+           <p>Or if u don't have an account, <Link to='/register' style={{ textDecoration: 'underline #8D8D8D', }}><span className="onboarding-description">Register.</span></Link></p>
        </div>
     </div>
 

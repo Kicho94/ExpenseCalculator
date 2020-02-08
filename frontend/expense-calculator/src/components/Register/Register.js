@@ -116,7 +116,7 @@ export default class Register extends React.Component {
 					</div>
 				</div>
 				<div className="onboarding-description">
-					<p>Or if u already have an account, <Link to='/'><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
+					<p>Or if u already have an account, <Link to='/' style={{ textDecoration: 'underline #8D8D8D', }}><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
 				</div>
 			</>
         );
