@@ -11,7 +11,7 @@ export default class DeleteModal extends React.Component {
        render(){
      
   return (
-    
+    <div className="modal-container">
      <div className="modal">
 
       <header className="modal_header">
@@ -19,16 +19,18 @@ export default class DeleteModal extends React.Component {
       </header>
 
       <section className="modal_content">
-            <p>You are about to delete this product. Are you sure you wish to continue? {this.props.name}</p>
+          <h2>You are about to delete this product. Are you sure you wish to continue?</h2>
       </section>
 
       <section className="modal_actions">
-           <button onClick={this.props.cancel} className="btn-cancel">Cancel</button>
-           <button className="btn-delete" onClick={this.props.deleteProduct}>Delete</button>
+           <div className="modal_actions-div">
+               <button onClick={this.props.cancel} className="btn-cancel">Cancel</button>
+               <button className="btn-delete" onClick={this.props.deleteProduct}>Delete</button>
+           </div>
      </section>
 
      </div>
-     
+     </div>
   )
 }
 }

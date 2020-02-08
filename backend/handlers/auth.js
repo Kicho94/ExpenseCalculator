@@ -13,10 +13,11 @@ const register = (req, res) => {
     var v = new validator.Validator(req.body, vUsers.createUser);
     v.check()
     .then(matched => {
-        if(matched){
+        console.log('asdfasdfasdfasdf')
+             if(matched){
             return  mUsers.getUserPasswordByEmail(req.body.email)
             .then((ed)=> {
-            if (ed === undefined){
+            if(!ed){
                      console.log('im in')
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -56,10 +57,13 @@ const register = (req, res) => {
             })
            
             
-        }else {
+            }else {
+                console.log(Error)
             throw new Error('Validation failed');
             
-        }
+            
+            
+        }   
     })
     .then(() => {
         return res.status(200).send('ok');

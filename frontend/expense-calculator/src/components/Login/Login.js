@@ -1,6 +1,6 @@
 import React from 'react'
 import './login.css'
-import {BrowserRouter as  Route, Link, Switch} from 'react-router-dom'
+import {BrowserRouter as  Route, Link} from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 
@@ -10,7 +10,7 @@ export default class Login extends React.Component {
         this.state = {
             email : "",
             password : "",
-            redirect : false
+           
         }
     }
 
@@ -37,22 +37,21 @@ export default class Login extends React.Component {
                 ) 
             .then(res => res.json())
             .then(d=>{
-                
                 localStorage.setItem('jwt', d.jwt);
-                localStorage.setItem('fullname', d.fullname)
-                this.setState({redirect : true})
-                
+                localStorage.setItem('fullname', d.fullname);
+                window.location.reload()                
             })
             .catch(err =>{
-                console.log(err)
-                alert('Your username or password is incorrect')
+                console.log(err);
+                alert('Your username or password is incorrect');
+                window.location.reload()
             })
         }
-  
+        
     render(){
-        if(this.state.redirect){
-            return <Redirect to="/products" />
-        }
+         if(localStorage.getItem('jwt')){
+                return <Redirect to="/products" />
+            }
         
         return(
             <div id="login-container">
@@ -70,11 +69,11 @@ export default class Login extends React.Component {
             <button className="main-button login-button" onClick={this.login}>SIGN IN</button>
         
        <div className="onboarding-description">
-           <p>Or if u don't have an account, <Link to='/register' style={{textDecoration: 'none'}}><span>Register.</span></Link></p>
+           <p>Or if u don't have an account, <Link to='/register'><span className="onboarding-description">Register.</span></Link></p>
        </div>
     </div>
 
 </div>
         )
     }
-}
+}   

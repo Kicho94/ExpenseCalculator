@@ -66,8 +66,9 @@ export default class Register extends React.Component {
 				alert('User successfuly created!')
 			})
 			.catch((error) => {
-				
-				window.location.reload();
+				console.log(data)
+				alert('something went wrong')
+				// window.location.reload();
 				console.error('Error:', error);
 		}) 
 		}
@@ -97,7 +98,7 @@ export default class Register extends React.Component {
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Date of Birth</label>
-							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser} placeholder="Month-Day-Year"/>
+							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser} placeholder="Year-Month-Day"/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Telephone</label>
@@ -115,7 +116,7 @@ export default class Register extends React.Component {
 					</div>
 				</div>
 				<div className="onboarding-description">
-					<p>Or if u already have an account, <Link to='/' style={{textDecoration: 'none'}}><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
+					<p>Or if u already have an account, <Link to='/'><a href="#" className="onboarding-description">Sign in</a>.</Link></p>
 				</div>
 			</>
         );

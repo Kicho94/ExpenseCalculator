@@ -15,8 +15,12 @@ export default class Products extends React.Component {
             show: null,
             id : undefined
         }       
-            }
-       
+        var style = {height:"100%", width : "100%",}
+    
+    }
+                             
+           
+      
     
     changeV = (event) => {
          this.setState(
@@ -89,29 +93,38 @@ export default class Products extends React.Component {
     
    
     render() {
-            return (<React.Fragment> 
-                <div id="products-container">
-             <Header />
+            return (
+<React.Fragment> 
+    <div id="products-container"  >
+        
+        <Header />
             <div id="products-background">
-            <div className="products-header">            
-                 <div><h1>Products</h1></div>
-                 <div className="filter">                     
-                  <p>Filter by: </p>
-                <select value={this.state.value} onChange={this.changeV}>
-                    <option value="purchase_date:-1">Latest Purchase</option>
-                    <option value="product_price:-1">Highest Price</option>
-                    <option value="product_price:1">Lowest Price</option>
-                    <option value="purchase_date:1">Oldest Purchases</option>
-                </select>  
-                 </div> 
-            </div>   
-           
-            <TableP data={this.state.data} showModal = {this.showModal} getId={this.getId}/>
-            {this.state.show}
+                <div className="products-header">            
+                    <div>
+                        <h1>Products</h1>
+                    </div>
+                        <div className="filter">                     
+                            <p>Filter by: </p>
+                                <select value={this.state.value} onChange={this.changeV}>
+                                    <option value="purchase_date:-1">Latest Purchase</option>
+                                    <option value="product_price:-1">Highest Price</option>
+                                    <option value="product_price:1">Lowest Price</option>
+                                    <option value="purchase_date:1">Oldest Purchases</option>
+                                </select>  
+                        </div> 
+                </div>   
+            
+                                <TableP data={this.state.data} showModal = {this.showModal} getId={this.getId} style1={this.state.show}/>
             </div>
-           </div>
-          <div className="newp-button"><Link to="/newproduct"><button>NEW PRODUCT</button></Link></div>
-        </React.Fragment>
+                    <div className="newp-button">
+                        <Link to="/newproduct"><button>NEW PRODUCT</button></Link>
+                    </div>
+                
+                    {this.state.show}
+    </div>        
+                             
+   
+</React.Fragment>
         )
     }
 }

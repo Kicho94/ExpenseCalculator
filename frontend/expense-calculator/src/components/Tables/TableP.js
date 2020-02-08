@@ -30,7 +30,7 @@ export default class TableP extends React.Component {
      
       if(this.props.data.length > 0){
            tableR  =  this.props.data.map((d)=> {
-           return <tr key={d._id}> 
+           return <tr  key={d._id} > 
             <td>{d.product_name}</td>
             <td>{d.product_type}</td>
             <td>{d.product_desc}</td>
@@ -55,7 +55,7 @@ export default class TableP extends React.Component {
         
             <div>
             
-    <table className="products-table">   
+    <table className="products-table" >   
         <thead>
             <tr>
                 <th>Product Name</th>

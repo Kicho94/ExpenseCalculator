@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useDebugValue } from 'react';
 import './assets/global.css'
 import Register from './components/Register/Register';
 import {BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom'
@@ -18,9 +18,11 @@ export default class App extends React.Component {
       
       <Router>
         <Switch>
+          
           <Route exact path = '/' component = {Login} />
           <Route exact path = '/register' component = {Register} />
-          <Route exact path = '/products' component = {Products} /> 
+          {localStorage.getItem('jwt') ?  undefined : <Redirect to="/"/> }
+          <Route exact path = '/products' component = {Products}/>
           <Route exact path = '/expenses' component ={Expenses} />
           <Route exact path = '/newproduct' component = {NewProduct}/>
           <Route path = '/editproduct/:id'  component ={EditProduct}/>

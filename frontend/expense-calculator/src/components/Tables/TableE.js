@@ -3,14 +3,9 @@ import React from 'react'
 export default class TableE extends React.Component {
     constructor(props){
         super(props)
-        this.state= {
-            
-        }
+       
     }
    
- 
-    
-
     render(){
        
         var tableE = null;
@@ -26,7 +21,19 @@ export default class TableE extends React.Component {
                     <td>{d.product_price}</td>
                   </tr>
         })
-      }else if(this.props.data.length == undefined){
+      }else if(this.props.vYear === "Choose Year"){
+        tableE = 
+        <tr >
+              <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A YEAR</td>
+        </tr>
+      }
+      else if(this.props.vMonth == "Choose Month"){
+        tableE = 
+        <tr >
+              <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A MONTH</td>
+        </tr>
+      }
+      else if(this.props.data.length < 1){
           console.log(this.props.data.length)
           tableE = 
           <tr >
