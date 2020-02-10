@@ -225,7 +225,7 @@ export default class Expenses extends React.Component {
             <p>Choose Year: </p>
                 <select value={this.state.vYear} onChange={this.changeVY1}>
                         <option value="Choose Year">Choose Year</option>
-                        <option value="all">ALL</option>
+                        <option value="all">All</option>
                         {yearOption}
                 </select>  
     </div> 

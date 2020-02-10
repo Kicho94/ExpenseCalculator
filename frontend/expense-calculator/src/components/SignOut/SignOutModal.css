@@ -1,57 +1,60 @@
-.modal-container {
-background-color: rgba(0, 0, 0, 0.59);
-width: 100%;
-height: 100%;
-position: fixed ;
-top: 0;
-left: 0;
-padding-left: 35%;
-padding-right: 35%;
-padding-top: 15rem;
+.modal-containeras {
+    background-color: rgba(0, 0, 0, 0.59);
+    width: 100%;
+    height: 100%;
+    position: fixed ;
+    padding-left: 35%;
+    padding-right: 35%;
+    padding-top: 15rem;
+    
+}
+
+.modala{
+width: 440px;
+ height: 155px;
+ background: white;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+border-radius: 10px;
+padding: 40px;
 margin-top: -50px;
 margin-left: -50px;
-
+top: 50%;
+left: 50%;  
+ 
+ 
 }
 
-.modal{
- width: 440px;
- height: 225px;
- background: white;
- box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
- border-radius: 10px;
- padding: 40px;
-}
-.modal_header {
-    color: #576574 ;
-    font-weight: bold;
-    margin-bottom: 3rem;
-}
 .modal_header h2 {
     margin: 0;   
     font-size: 22px ;
     font-family: sans-serif;
 }
 
-.modal_content {
-    margin-bottom: 3rem;
+.modal_contenta {
+    margin-bottom:0;
+  
 }
 
-.modal_content h2{ 
-font-weight: normal;
+.modal_contenta h2{ 
+font-weight: bold;
 /* text-align: center; */
 color: #576574 ;
+font-family: sans-serif;
+
 }
 
-.modal_actions {
+.modal_actionsa {
+margin-top: 4rem;
 display: flex;
 justify-content: flex-end;
+
 }
 
-.modal_actions-div {
+.modal_actionsa-div {
     width: 50%;
 }
 
-.modal_actions button {
+.modal_actionsa button {
 width: 50%;
 height: 100%;
 font-size: 1.3rem;

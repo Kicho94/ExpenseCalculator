@@ -13,10 +13,12 @@ export default class NewProduct extends React.Component {
             purchase_date: undefined,
             product_price: undefined,
             redirect : false,
-            valid : false
+            valid : false,
+            quantity: "1"
            
         }
     }
+    
 
     saveProduct = (event) => {
         this.setState({[event.target.id] : event.target.value})
@@ -33,6 +35,9 @@ export default class NewProduct extends React.Component {
             alert('PLEASE SELECT THE DATE AS SHOWN')
             window.location.reload()
         } else {
+            for(let i = 1; i <= this.state.quantity; i++){
+                
+               
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,
@@ -64,8 +69,12 @@ export default class NewProduct extends React.Component {
         console.log(err)
         alert('Something went wrong')
         })
+         }
+        } 
+     }
+    changeV = (event)=>{
+        this.setState({quantity : event.target.value})
     }
-        }
 
     render (){
         if (this.state.redirect){
@@ -101,13 +110,25 @@ export default class NewProduct extends React.Component {
 			
 		    <p className="input-holder">
 			<label className="field-label">Purchase Date</label>
-			<input type="text" className="text-field" id="purchase_date" onChange={this.saveProduct} placeholder="Year-Month-Day"/>
+			<input type="text" className="text-field" id="purchase_date" onChange={this.validate} placeholder="Year-Month-Day"/>
 		    </p> 
 
 		 <p className="input-holder">
 			<label className="field-label">Product Price</label>
 			<input type="number" className="text-field" min="0" id="product_price" onChange={this.saveProduct}/>
 		 </p> 
+         <select onChange={this.changeV}>
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+             <option value="6">6</option>
+             <option value="7">7</option>
+             <option value="8">8</option>
+             <option value="9">9</option>
+             <option value="10">10</option>
+         </select>
 
 	    <button className="main-button register-button" onClick={this.createProduct}>CREATE NEW PRODUCT</button>
              

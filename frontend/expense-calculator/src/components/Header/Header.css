@@ -11,3 +11,11 @@
     border: none;
     cursor: pointer;
 }
+.account-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.account-button:focus {
+    outline: none;
+    }
