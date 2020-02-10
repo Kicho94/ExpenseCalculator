@@ -31,13 +31,12 @@ export default class NewProduct extends React.Component {
 	}
 
     createProduct = () => {
+        var counter = this.state.quantity
         if(!this.state.valid){
             alert('PLEASE SELECT THE DATE AS SHOWN')
             window.location.reload()
         } else {
             for(let i = 1; i <= this.state.quantity; i++){
-                
-               
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,
@@ -57,21 +56,22 @@ export default class NewProduct extends React.Component {
             body: JSON.stringify(data)
          }
         ) 
-        .then((data)=> {
-        console.log(data);
-        if(data.status === 201){
-        alert('Product successfully added');
-        this.setState({redirect : true})
+            .then((data)=> {
+            console.log(data);
+            if(data.status === 201){
+            alert('Product successfully added');
+            this.setState({redirect : true})
     }   
+            }
+            )   
+            .catch(err =>{
+            console.log(err)
+            alert('Something went wrong')
+            })
+            if(counter === i){break;} 
         }
-        )   
-        .catch(err =>{
-        console.log(err)
-        alert('Something went wrong')
-        })
-         }
-        } 
-     }
+    } 
+}
     changeV = (event)=>{
         this.setState({quantity : event.target.value})
     }
