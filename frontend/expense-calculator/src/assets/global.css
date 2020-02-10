@@ -72,7 +72,8 @@ margin: 0;
 }
 .avatar {
     display: inline-flex;
-    align-items: center;    
+    align-items: center;   
+    /* width: auto;  */
 }
 
 .avatar p {

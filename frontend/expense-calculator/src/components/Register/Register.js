@@ -14,7 +14,8 @@ export default class Register extends React.Component {
 			telephone : null,
 			country : "",
 			password : "",
-			redirect : false
+			redirect : false,
+			valid : false
 		};
 		this.saveUser = this.saveUser.bind(this)
 		this.registerUser = this.registerUser.bind(this);
@@ -26,7 +27,13 @@ export default class Register extends React.Component {
 		this.setState({[event.target.id] : event.target.value})
 	}
 
-	registerUser = (event) => {
+	
+	validate =(event) =>{
+		const rules = /^([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}$/g;
+		const valid = rules.test(event.target.value);
+		this.setState({valid, [event.target.id] : event.target.value})
+	}
+	registerUser = (event) =>{
 		if(this.state.first_name.length < 0 ||
 			this.state.last_name.length < 0 ||
 			this.state.email.length < 0 ||
@@ -40,7 +47,11 @@ export default class Register extends React.Component {
 			alert("Please enter a valid email");
 		} else if (this.state.password.length < 3) { 
 			alert("Password must be at least 3 characters");
-		} else if (this.state.first_name.length > 0 &&
+		} else if(!this.state.valid){
+			alert("Please create the date as shown")
+			window.location.reload()
+		}
+		else if (this.state.first_name.length > 0 &&
 			this.state.last_name.length > 0 &&
 			this.state.email.length > 0 &&
 			this.state.birth_date.length > 0 &&
@@ -68,7 +79,7 @@ export default class Register extends React.Component {
 			.catch((error) => {
 				console.log(data)
 				alert('something went wrong')
-				// window.location.reload();
+				window.location.reload();
 				console.error('Error:', error);
 		}) 
 		}
@@ -98,7 +109,7 @@ export default class Register extends React.Component {
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Date of Birth</label>
-							<input type="text" className="text-field" id="birth_date" onChange={this.saveUser} placeholder="Year-Month-Day"/>
+							<input type="text" className="text-field" id="birth_date" onChange={this.validate} placeholder="Year-Month-Day"/>
 						</p> 
 						<p className="input-holder">
 							<label className="field-label" >Telephone</label>

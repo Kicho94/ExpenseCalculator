@@ -13,13 +13,21 @@ export default class EditProduct extends React.Component {
             purchase_date: undefined,
             product_price: undefined,
             redirect : false,
-            data : {}
+            data : {},
+            valid : false
         }
     }
 
     saveProduct = (event) => {
         this.setState({[event.target.id] : event.target.value})
     }
+
+    validate =(event) =>{
+		const rules = /^([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}$/g;
+		const valid = rules.test(event.target.value);		
+		this.setState({valid, [event.target.id] : event.target.value})
+	}
+
     componentDidMount(){
         const id = this.props.match.params.id
         fetch(`http://127.0.0.1:8080/api/v1/products/${id}`,
@@ -47,6 +55,10 @@ export default class EditProduct extends React.Component {
 
 
     createProduct = () => {
+        if(!this.state.valid){
+            alert('PLEASE SELECT THE DATE AS SHOWN');
+            window.location.reload()
+        } else {
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,
@@ -79,6 +91,7 @@ export default class EditProduct extends React.Component {
         console.log(err)
         alert('Something went wrong')
         })
+    }
         }
 
     render (){
@@ -114,7 +127,7 @@ export default class EditProduct extends React.Component {
 			
 		    <p className="input-holder">
 			    <label className="field-label">Purchase Date</label>
-			    <input type="text" className="text-field" id="purchase_date" onChange={this.saveProduct} placeholder={this.state.data.purchase_date} />
+			    <input type="text" className="text-field" id="purchase_date" onChange={this.validate} placeholder={this.state.data.purchase_date} />
 		    </p> 
 
 		    <p className="input-holder">

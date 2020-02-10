@@ -27,17 +27,23 @@ export default class TableE extends React.Component {
               <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A YEAR</td>
         </tr>
       }
-      else if(this.props.vMonth == "Choose Month"){
+      else if(this.props.vMonth == "Choose Month" && this.props.boolean === false){
         tableE = 
         <tr >
               <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A MONTH</td>
         </tr>
       }
-      else if(this.props.data.length < 1){
+      else if(this.props.data.length < 1 && this.props.boolean === false){
           console.log(this.props.data.length)
           tableE = 
           <tr >
                 <td colSpan="5" style={{align : "center"}} >PLEASE CREATE YOUR FIRST PRODUCT</td>
+          </tr>
+        }
+        else if(this.props.data.length == undefined && this.props.boolean){
+          tableE = 
+          <tr >
+                <td colSpan="5" style={{align : "center"}} >PLEASE SELECT A YEAR</td>
           </tr>
         }; 
        

@@ -39,9 +39,17 @@ export default class Expenses extends React.Component {
             {vYear : [event.target.value]}, this.getSortedDate)
     }  
     changeVY1 = (event) => {
-        
+            
             this.setState(
-                {vYear : [event.target.value]}, this.getDateByYear1)
+                {
+                vYear : [event.target.value]},
+                () => {
+                    if(this.state.vYear == 'all'){
+                    this.getAlldata()
+                    }else {
+                    this.getDateByYear1()
+                }
+                })
     }         
         
     getDateByYear = () => {
@@ -130,7 +138,8 @@ export default class Expenses extends React.Component {
     }
 
 
-    getAlldata = () => { 
+    getAlldata = () => {
+    
         fetch('http://127.0.0.1:8080/api/v1/products?sort=purchase_date:-1',
     {
         method : 'get',
@@ -142,32 +151,33 @@ export default class Expenses extends React.Component {
     )
     .then(response => response.json())
     .then((data)  => {
-        
+        this.setState({data : data}, ()=> {if(this.state.boolean === false){ this.setState({data : {}})}})
+        this.totalExpense()
         for(let i = 0; i < data.length; i++){
         if(this.state.dataY.indexOf(data[i].purchase_date.substring(0,4)) == -1)
                this.setState({dataY : [...this.state.dataY, data[i].purchase_date.substring(0,4)]})
-
     }
-    
-    this.setState({data : data})
-    this.totalExpense()
     
     })
     .catch(err => console.log(err))
+   
     }
+    
+       
+     
     
     yearlyFunction = () => {
-        this.setState({vYear: ""})
-        this.setState({boolean : true})
-        this.getAlldata()
+        // this.getAlldata()
+        this.setState({boolean : true});
+        this.setState({vYear: ""});
+        this.setState({data : {}})
+        
 
     }
-    
     componentDidMount(){
         this.getAlldata()
+        
     }
-     
-
 
     render() {
         
@@ -215,6 +225,7 @@ export default class Expenses extends React.Component {
             <p>Choose Year: </p>
                 <select value={this.state.vYear} onChange={this.changeVY1}>
                         <option value="Choose Year">Choose Year</option>
+                        <option value="all">ALL</option>
                         {yearOption}
                 </select>  
     </div> 
@@ -231,7 +242,7 @@ export default class Expenses extends React.Component {
                 </div>  
         <div className="expenses-header">
                     <div className="buttons-div">
-                         <button className={this.state.boolean ? "mont-yearU" : "mont-year"} onClick ={()=>{this.setState({boolean : false})}}>MONTHLY</button>
+                         <button className={this.state.boolean ? "mont-yearU" : "mont-year"} onClick ={()=>{this.setState({boolean : false, data : {}})}}>MONTHLY</button>
                          <button className={this.state.boolean ? "mont-year" : "mont-yearU"} onClick={this.yearlyFunction}>YEARLY</button>
                     </div>  
                     
@@ -241,7 +252,7 @@ export default class Expenses extends React.Component {
         </div> 
                  <br/>
                  
-            <TableE data={this.state.data} vMonth={this.state.vMonth} vYear={this.state.vYear} />
+            <TableE data={this.state.data} vMonth={this.state.vMonth} vYear={this.state.vYear} boolean={this.state.boolean}/>
             </div>           
            </div>
            <div className="expenses-footer">

@@ -12,7 +12,8 @@ export default class NewProduct extends React.Component {
             product_type: '',
             purchase_date: undefined,
             product_price: undefined,
-            redirect : false
+            redirect : false,
+            valid : false
            
         }
     }
@@ -21,9 +22,17 @@ export default class NewProduct extends React.Component {
         this.setState({[event.target.id] : event.target.value})
     }
 
+    validate =(event) =>{
+		const rules = /^([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}$/g;
+		const valid = rules.test(event.target.value);
+		this.setState({valid, [event.target.id] : event.target.value})
+	}
 
     createProduct = () => {
-        
+        if(!this.state.valid){
+            alert('PLEASE SELECT THE DATE AS SHOWN')
+            window.location.reload()
+        } else {
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,
@@ -50,11 +59,12 @@ export default class NewProduct extends React.Component {
         this.setState({redirect : true})
     }   
         }
-        )
+        )   
         .catch(err =>{
         console.log(err)
         alert('Something went wrong')
         })
+    }
         }
 
     render (){

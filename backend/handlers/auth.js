@@ -50,6 +50,7 @@ const register = (req, res) => {
                     });
                 } else {
                     throw new Error('Bad Request - User Exists')
+                    return res.status(400).send('User exists')
                 }
             })
             .catch((err) => {
