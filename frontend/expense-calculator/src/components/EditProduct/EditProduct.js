@@ -23,12 +23,18 @@ export default class EditProduct extends React.Component {
     }
 
     validate =(event) =>{
-		const rules = /^([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}$/g;
+        const rules = /^([12]\d{3}-([0-9]{1,2}|1[0-2])-([0-9]{1,2}|[12]\d|3[01]))$/g;
 		const valid = rules.test(event.target.value);		
-		this.setState({valid, [event.target.id] : event.target.value})
-	}
-
+		this.setState({valid , [event.target.id] : event.target.value})
+    }
+    validate1= () => {
+        const rules = /^([12]\d{3}-([0-9]{1,2}|1[0-2])-([0-9]{1,2}|[12]\d|3[01]))$/g;
+        const valid = rules.test(this.state.purchase_date);
+        this.setState({valid})	
+    }
+    
     componentDidMount(){
+        
         const id = this.props.match.params.id
         fetch(`http://127.0.0.1:8080/api/v1/products/${id}`,
         {
@@ -44,21 +50,21 @@ export default class EditProduct extends React.Component {
            console.log(data)
            data.purchase_date = new Date(data.purchase_date).toISOString().substring(0, 10)
            this.setState({ data : data, product_name: data.product_name, product_desc : data.product_desc, product_type : data.product_type, purchase_date: data.purchase_date, product_price : data.product_price})
-           
+           this.validate1()
        })
        .catch((err)=> {
            console.log(err)
        });
-            
-        
+      
     }
 
 
     createProduct = () => {
-        if(!this.state.valid){
-            alert('PLEASE SELECT THE DATE AS SHOWN');
-            window.location.reload()
-        } else {
+            if(!this.state.valid){
+                alert('PLEASE SELECT THE DATE AS SHOWN');
+                window.location.reload()
+            } else {
+        
         const data = {
             product_name: this.state.product_name,
             product_desc: this.state.product_desc,

@@ -86,11 +86,11 @@ const replace = (req, res) => {
     var data = req.body;
     console.log(data)
     let er = 0;
-    if(data.product_name == undefined || data.ime.length == 0){er++;}
-    if(data.product_desc == undefined || data.zanr.length == 0){er++;}
-    if(data.product_type == undefined || data.akteri.length == 0){er++;}
-    if(data.purchase_date == undefined || data.godina.length == 0){er++;}
-    if(data.product_price == undefined || data.rezija.length == 0){er++;}
+    if(data.product_name == undefined || data.product_name.length == 0){er++;}
+    if(data.product_desc == undefined || data.product_desc.length == 0){er++;}
+    if(data.product_type == undefined || data.product_type.length == 0){er++;}
+    if(data.purchase_date == undefined || data.purchase_date.length == 0){er++;}
+    if(data.product_price == undefined || data.product_price.length == 0){er++;}
     if(er == 0){
     mProducts.replace(req.params.id, req.body)
    .then(()=> {

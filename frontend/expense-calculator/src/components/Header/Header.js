@@ -22,7 +22,7 @@ class  Header extends React.Component {
   handleBlur = () => {
     setTimeout(() => {
       this.setState({showItems : false})
-    },150)
+    },450)
   }
 
   render(){

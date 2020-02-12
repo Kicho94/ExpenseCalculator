@@ -1,4 +1,6 @@
+var bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+
 
 const User = mongoose.model(
     'users',
@@ -53,9 +55,44 @@ const confirmUserAccount = (hash) => {
         })
     })
 }
+const updateP = (email, data) => {
 
+    return new Promise ((success, fail) =>{
+        User.updateOne({email:email}, {password : data}, err =>{
+            if(err){
+                return fail(err)
+            }
+            return success();
+        });
+    });
+};
+const updateU = (id, data) => {
+    return new Promise ((success, fail) =>{
+        User.updateOne({_id:id}, data, err =>{
+            if(err){
+                return fail(err)
+            }
+            return success();
+        });
+    });
+};
+
+const getUser = (id) => {
+    return new Promise((success, fail) => {
+        User.find({_id:id}, {password : 0, confirm_hash : 0, confirmed : 0, __v : 0, _id: 0}, (err,data)=> {
+            if(err){
+                return fail;
+            }
+            return success(data[0])
+        })
+    })
+}
 module.exports = {
     createUser,
     getUserPasswordByEmail,
-    confirmUserAccount
+    confirmUserAccount,
+    updateP,
+    updateU,
+    getUser
+    
 }

@@ -111,11 +111,13 @@ export default class Expenses extends React.Component {
     getSortedDate = () =>{  
         
         //funkcija koja zema sortirana data za odreden mesec i godina
-        var monthTo = Number(this.state.vMonth) + 1
+        let monthTo = Number(this.state.vMonth) + 1
         monthTo = monthTo.toString()
         const dateStart = new Date(`${this.state.vYear}-${this.state.vMonth}-1`).getTime()
-        const dateEnd = new Date(`${this.state.vYear}-${monthTo}-1`).getTime()
-       
+        let dateEnd = new Date(`${this.state.vYear}-${monthTo}-1`).getTime()
+        if(monthTo === '13'){
+            dateEnd = new Date(`${(Number(this.state.vYear) + 1)}-1-1`).getTime()
+        }
         fetch(`http://127.0.0.1:8080/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
         {
             method : 'GET',
@@ -171,12 +173,12 @@ export default class Expenses extends React.Component {
         this.setState({boolean : true});
         this.setState({vYear: ""});
         this.setState({data : {}})
+        this.setState({totalExpense: undefined})
         
 
     }
     componentDidMount(){
         this.getAlldata()
-        
     }
 
     render() {
@@ -195,13 +197,13 @@ export default class Expenses extends React.Component {
      monthlyM =
             <div className="filter">                     
                     <p>Choose Month: </p> 
-                        <select value={this.state.vMonth} onChange={this.changeV}>
+                        <select value={this.state.vMonth} onChange={this.changeV} disabled={this.state.vYear === 'Choose Year' || this.state.vYear.indexOf("Choose Year") > -1 ?  true :  false}>
                                 <option value="Choose Month" className={1==1 ? "red" : "green"}>Choose Month</option>
                                 <option value="1" className={this.state.style.indexOf(1) > -1 ? "green" : "red"}>January</option>
                                 <option value="2" className={this.state.style.indexOf(2) > -1 ? "green" : "red"}>February</option>
                                 <option value="3" className={this.state.style.indexOf(3) > -1 ? "green" : "red"}>March</option>
                                 <option value="4" className={this.state.style.indexOf(4) > -1 ? "green" : "red"}>April</option>
-                                <option value="05" className={this.state.style.indexOf(5) > -1 ? "green" : "red"}>May</option>
+                                <option value="5" className={this.state.style.indexOf(5) > -1 ? "green" : "red"}>May</option>
                                 <option value="6" className={this.state.style.indexOf(6) > -1 ? "green" : "red"}>June</option>
                                 <option value="7" className={this.state.style.indexOf(7) > -1 ? "green" : "red"}>July</option>
                                 <option value="8" className={this.state.style.indexOf(8) > -1 ? "green" : "red"}>August</option>

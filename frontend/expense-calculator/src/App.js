@@ -7,6 +7,7 @@ import Products from './components/Products/Products';
 import Expenses from './components/Expenses/Expenses';
 import NewProduct from './components/NewProduct/NewProduct';
 import EditProduct from './components/EditProduct/EditProduct'
+import EditProfile from './components/EditProfile/EditProfile';
 
 
 export default class App extends React.Component {
@@ -26,6 +27,7 @@ export default class App extends React.Component {
           <Route exact path = '/expenses' component ={Expenses} />
           <Route exact path = '/newproduct' component = {NewProduct}/>
           <Route path = '/editproduct/:id'  component ={EditProduct}/>
+          <Route path = '/editprofile/' component ={EditProfile}/>
           </Switch>
       </Router>
       

@@ -29,7 +29,7 @@ export default class Register extends React.Component {
 
 	
 	validate =(event) =>{
-		const rules = /^([0-9]){4}-([0-9]){1,2}-([0-9]){1,2}$/g;
+		const rules = /^([12]\d{3}-([0-9]{1,2}|1[0-2])-([0-9]{1,2}|[12]\d|3[01]))$/g;
 		const valid = rules.test(event.target.value);
 		this.setState({valid, [event.target.id] : event.target.value})
 	}

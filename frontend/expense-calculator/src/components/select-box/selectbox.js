@@ -1,6 +1,8 @@
 import React from 'react'
 import  './styles.css'
-    
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom'
+
+
 export default class SelectBox extends React.Component {
     constructor(props){
         super(props)
@@ -11,16 +13,13 @@ export default class SelectBox extends React.Component {
               
         }
     }
-    
-    
     render(){
         
-
         return(
             <React.Fragment>
 
             <div className="select-box" style={{display: this.props.showItems ? 'block' : 'none'}}>
-                 <button>Account</button>
+                 <Link to="/editprofile"><button>Account</button></Link>
                  <button onClick={this.props.openModal}>Sign Out!</button>
                  
             </div>

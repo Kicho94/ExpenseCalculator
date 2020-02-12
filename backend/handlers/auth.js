@@ -13,7 +13,6 @@ const register = (req, res) => {
     var v = new validator.Validator(req.body, vUsers.createUser);
     v.check()
     .then(matched => {
-        console.log('asdfasdfasdfasdf')
              if(matched){
             return  mUsers.getUserPasswordByEmail(req.body.email)
             .then((ed)=> {
@@ -36,12 +35,12 @@ const register = (req, res) => {
                             confirmed : false
                         });
                         sgMail.setApiKey(config.getConfig('mailer').key);
-                        const msg = {
+                        let msg = {
                             to : req.body.email,
                             from : 'kspasovski1@gmail.com',
                             subject : 'Thanks for registering',
                             text : 'Thanks for registering',
-                            html : `<a href = "http://localhost:8081/api/v1/confirm/${confirm_hash}>Click here to confirm your account</a>`,
+                            html : `<strong><p>Hello, please<p/><a href = "http://localhost:8081/api/v1/confirm/${confirm_hash}">click here to confirm your account</a><strong/>`,
                         };
                         sgMail.send(msg);
                         return;
@@ -86,7 +85,6 @@ const login = (req, res) => {
                 return res.status(500).send("could not compare password");
             }
             if(rez){
-                // return res.status(200).send('OK');
                 var tokenData = {
                     id: data._id,
                     full_name : `${data.first_name} ${data.last_name}`,
@@ -111,13 +109,36 @@ const renew = (req, res) => {
     return res.status(200).send(req.user.id);
 }
 const resetLink = (req, res) => {
-    return res.status(200).send('ok');
 }
 const resetPassword = (req, res) => {
     return res.status(200).send('ok');
 }
 const changePassword = (req, res) => {
-    return res.status(200).send('ok');
+    mUsers.getUserPasswordByEmail(req.user.email)
+    .then((data)=>{
+        bcrypt.compare(req.body.password, data.password, function(err, rez){
+            if(err){
+                return res.status(500).send("Could not compare password");
+            }  
+            if(rez){
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash(req.body.newPassword, salt, function(err, hash) {
+                        if(err){
+                            throw new Error(err);
+                            return;
+                        }
+                mUsers.updateP(req.user.email, hash)
+                .then(()=> {
+                    console.log('Password changed successfully')
+                 return res.status(200).send('Password successfully changed')
+                })
+               .catch((err)=> {console.log(err)})
+            });
+            })
+
+            }
+        })
+    })
 }
 const confirm = (req, res) => {
     // koga nekoj kje klikne na 
@@ -137,6 +158,37 @@ const confirm = (req, res) => {
     })
 }
 
+const updateUser = (req, res) => {
+if(req.body.password === undefined && req.body.confirm_hash === undefined && req.body.confirmed === undefined && req.body._id === undefined && req.body.__v === undefined){
+var data = req.body
+mUsers.updateU(req.user.id, data)
+.then(()=> {
+    return res.status(200).send('User updated')
+})
+.catch((err)=> {
+    console.log(err);
+    res.status(500).send(err)
+        })
+    }
+else{
+    return res.status(500).send('Nice try')
+    }
+}
+
+
+const getUser = (req, res) => {
+   mUsers.getUser(req.user.id)
+   .then((data)=> {
+       res.status(200).send(data)
+   })
+   .catch((err)=>{
+       res.status(500).send(err)
+   })
+   
+}
+
+
+
 module.exports = {
     register,
     login,
@@ -144,5 +196,7 @@ module.exports = {
     resetLink,
     resetPassword,
     changePassword,
-    confirm 
+    confirm,
+    updateUser,
+    getUser
 }

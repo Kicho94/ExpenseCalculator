@@ -17,7 +17,7 @@ api.use(cors());
 api.use(
     jwt( {secret: config.getConfig('jwt').key} )
     .unless(
-        { path: ['/api/v1/register', '/api/v1/login']}
+        { path: ['/api/v1/register', '/api/v1/login', '/api/v1/confirm/:confirm_hash']}
     )
 );
 
@@ -27,8 +27,13 @@ api.post('/api/v1/login', auth.login);
 api.get('/api/v1/renew', auth.renew);
 api.post('/api/v1/reset-link', auth.resetLink);
 api.post('/api/v1/reset-password', auth.resetPassword);
-api.post('/api/v1/change-password', auth.changePassword);
+api.patch('/api/v1/change-password', auth.changePassword);
 api.post('/api/v1/confirm/:confirm_hash', auth.confirm)
+api.patch('/api/v1/update-user', auth.updateUser)
+api.get('/api/v1/user-info', auth.getUser)
+
+
+
 
 api.use(function(err, req, res, next) {
     if(err.name === 'UnauthorizedError'){
