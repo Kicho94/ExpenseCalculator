@@ -25,7 +25,7 @@ changePassword = () => {
         }
         fetch('http://127.0.0.1:8081/api/v1/change-password',
         {
-            method: 'PATCH',
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -70,7 +70,7 @@ render(){
                 <input type="password" className="text-field" id="newPassword" onChange={this.saveInfo} />
             </p>   
             <p className="input-holder">
-                <label className="field-label">New Password</label>
+                <label className="field-label">Confirm New Password</label>
                 <input type="password" className="text-field" id="newPassword1" onChange={this.saveInfo} />
             </p>   
          

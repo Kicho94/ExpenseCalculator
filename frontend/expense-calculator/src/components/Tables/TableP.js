@@ -53,7 +53,7 @@ export default class TableP extends React.Component {
         return ( 
               <React.Fragment>
         
-            <div>
+            <div className="products-table-main">
             
     <table className="products-table" >   
         <thead>

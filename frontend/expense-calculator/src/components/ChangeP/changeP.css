@@ -5,11 +5,9 @@
     position: fixed ;
     top: 0;
     left: 0;
-    padding-left: 35%;
-    padding-right: 35%;
-    padding-top: 15rem;
-    margin-top: -50px;
-    margin-left: -50px;
+    right: 0;
+    bottom: 0;
+    
     
     }
     
@@ -20,6 +18,10 @@
      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
      border-radius: 10px;
      padding: 40px;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     position: absolute;
     }
     .modal_header1 {
         color: #576574 ;

@@ -104,7 +104,35 @@ margin: 0;
     margin: 30px 0px 0px 0px;   
 }
 
+@media(max-width: 767px){
+    html,body {
+    overflow-x: hidden;
+    }
+    .main-header{
+        display: block
+    }
+    .btn-div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center
+    }
+    .products-table-main{
+        overflow: scroll;
+    }
+    .newp-button {
+        left: 0;
+        width: 100% !important;
+        height: 7% !important;
+    }
+    .newp-button button {
+        margin: 0 !important;
+    }
+}
 
-    
 
 

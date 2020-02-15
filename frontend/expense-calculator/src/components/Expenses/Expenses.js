@@ -197,20 +197,20 @@ export default class Expenses extends React.Component {
      monthlyM =
             <div className="filter">                     
                     <p>Choose Month: </p> 
-                        <select value={this.state.vMonth} onChange={this.changeV} disabled={this.state.vYear === 'Choose Year' || this.state.vYear.indexOf("Choose Year") > -1 ?  true :  false}>
+                        <select value={this.state.vMonth} onChange={this.changeV} disabled={this.state.vYear === "Choose Year" || this.state.vYear.indexOf("Choose Year") > -1 ?  true :  false}>
                                 <option value="Choose Month" className={1==1 ? "red" : "green"}>Choose Month</option>
-                                <option value="1" className={this.state.style.indexOf(1) > -1 ? "green" : "red"}>January</option>
-                                <option value="2" className={this.state.style.indexOf(2) > -1 ? "green" : "red"}>February</option>
-                                <option value="3" className={this.state.style.indexOf(3) > -1 ? "green" : "red"}>March</option>
-                                <option value="4" className={this.state.style.indexOf(4) > -1 ? "green" : "red"}>April</option>
-                                <option value="5" className={this.state.style.indexOf(5) > -1 ? "green" : "red"}>May</option>
-                                <option value="6" className={this.state.style.indexOf(6) > -1 ? "green" : "red"}>June</option>
-                                <option value="7" className={this.state.style.indexOf(7) > -1 ? "green" : "red"}>July</option>
-                                <option value="8" className={this.state.style.indexOf(8) > -1 ? "green" : "red"}>August</option>
-                                <option value="9" className={this.state.style.indexOf(9) > -1 ? "green" : "red"}>September</option>
-                                <option value="10" className={this.state.style.indexOf(10) > -1 ? "green" : "red"}>October</option>
-                                <option value="11" className={this.state.style.indexOf(11) > -1 ? "green" : "red"}>November</option>
-                                <option value="12" className={this.state.style.indexOf(12) > -1 ? "green" : "red"}>December</option>
+                                <option value="1" className={this.state.style.indexOf(1) > -1 ? "green" : null} disabled={this.state.style.indexOf(1) > -1 ? false : true}>January</option>
+                                <option value="2" className={this.state.style.indexOf(2) > -1 ? "green" : null} disabled={this.state.style.indexOf(2) > -1 ? false : true}>February</option>
+                                <option value="3" className={this.state.style.indexOf(3) > -1 ? "green" : null} disabled={this.state.style.indexOf(3) > -1 ? false : true}>March</option>
+                                <option value="4" className={this.state.style.indexOf(4) > -1 ? "green" : null} disabled={this.state.style.indexOf(4) > -1 ? false : true}>April</option>
+                                <option value="5" className={this.state.style.indexOf(5) > -1 ? "green" : null} disabled={this.state.style.indexOf(5) > -1 ? false : true}>May</option>
+                                <option value="6" className={this.state.style.indexOf(6) > -1 ? "green" : null} disabled={this.state.style.indexOf(6) > -1 ? false : true}>June</option>
+                                <option value="7" className={this.state.style.indexOf(7) > -1 ? "green" : null} disabled={this.state.style.indexOf(7) > -1 ? false : true}>July</option>
+                                <option value="8" className={this.state.style.indexOf(8) > -1 ? "green" : null} disabled={this.state.style.indexOf(8) > -1 ? false : true}>August</option>
+                                <option value="9" className={this.state.style.indexOf(9) > -1 ? "green" : null} disabled={this.state.style.indexOf(9) > -1 ? false : true}>September</option>
+                                <option value="10" className={this.state.style.indexOf(10) > -1 ? "green" : null} disabled={this.state.style.indexOf(10) > -1 ? false : true}>October</option>
+                                <option value="11" className={this.state.style.indexOf(11) > -1 ? "green" : null} disabled={this.state.style.indexOf(11) > -1 ? false : true}>November</option>
+                                <option value="12" className={this.state.style.indexOf(12) > -1 ? "green" : null} disabled={this.state.style.indexOf(12) > -1 ? false : true}>December</option>
                         </select>  
             </div> 
      monthlyY = 
@@ -244,7 +244,7 @@ export default class Expenses extends React.Component {
                 </div>  
         <div className="expenses-header">
                     <div className="buttons-div">
-                         <button className={this.state.boolean ? "mont-yearU" : "mont-year"} onClick ={()=>{this.setState({boolean : false, data : {}})}}>MONTHLY</button>
+                         <button className={this.state.boolean ? "mont-yearU" : "mont-year"} onClick ={()=>{this.setState({boolean : false, data : {}, vYear : "Choose Year", style : [], totalExpense : 0})}}>MONTHLY</button>
                          <button className={this.state.boolean ? "mont-year" : "mont-yearU"} onClick={this.yearlyFunction}>YEARLY</button>
                     </div>  
                     

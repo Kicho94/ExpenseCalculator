@@ -126,9 +126,9 @@ const changePassword = (req, res) => {
                         if(err){
                             throw new Error(err);
                             return;
-                        }
+                        }   
                 mUsers.updateP(req.user.email, hash)
-                .then(()=> {
+                  .then(()=> {
                     console.log('Password changed successfully')
                  return res.status(200).send('Password successfully changed')
                 })

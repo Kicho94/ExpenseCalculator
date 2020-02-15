@@ -32,7 +32,7 @@ class  Header extends React.Component {
   {this.state.showModal}
           
       <div className="main-header">
-      <div>
+      <div className="btn-div">
       <Link to='/products' style={{ color: 'inherit', textDecoration: 'inherit'}}> <button className="products-button" >PRODUCTS</button></Link>
       <Link to='/expenses' style={{ color: 'inherit', textDecoration: 'inherit'}}> <button className="expenses-button">EXPENSES</button></Link>
        </div>
