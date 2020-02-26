@@ -143,7 +143,7 @@ export default class EditProfile extends React.Component {
 
 		    <p className="input-holder">
 		    	<label className="field-label">Telephone</label>
-			    <input type="number" className="text-field" min="0" id="telephone" defaultValue={this.state.telephone} onChange={this.saveProfile}/>
+			    <input type="text" className="text-field" min="0" id="telephone" defaultValue={this.state.telephone} onChange={this.saveProfile}/>
 		     </p > 
 
              <p className="input-holder">

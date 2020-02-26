@@ -137,6 +137,7 @@ const resetLink = (req, res) => {
 
 
 const resetPassword = (req, res) => {
+    console.log(req.body.newPassword.length)
     if(req.body.newPassword.length > 2){
     mUsers.getHash(req.body.confirm)
     .then((data)=>{
@@ -158,7 +159,7 @@ const resetPassword = (req, res) => {
 })
 .catch(err=>{console.log(err)})
 }
-else{res.status(500).send('BAD REQUEST')}
+else{return res.status(500).send('BAD REQUEST')}
 }
 
 

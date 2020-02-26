@@ -50,9 +50,14 @@ changePassword = () => {
         })
     } else if(this.state.newPassword !== this.state.newPassword1){
         this.setState({loading:false})
-        alert('Please match your new password, or make password length more than 2')
+        alert('Please match your new password')
+        window.location.reload()
     }
-    
+    else if(this.state.newPassword.length <= 2){
+        this.setState({loading:false})
+        alert('Please enter a password with more than 2 characters')
+        window.location.reload()
+    }
 }
 
 render(){
