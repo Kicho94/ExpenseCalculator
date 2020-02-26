@@ -39,7 +39,7 @@ const createUser = (data) => {
 
 const getUserPasswordByEmail = (email) => {
     return new Promise((success, fail) => {
-        User.find({email: email}, {password: 1, first_name : 1, last_name :1, email : 1, confirm_hash : 1}, (err, data) => {
+        User.find({email: email}, {password: 1, first_name : 1, last_name :1, email : 1, confirm_hash : 1, confirmed : 1}, (err, data) => {
          if(err){
              return fail(err);
          }    

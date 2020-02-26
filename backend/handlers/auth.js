@@ -89,7 +89,7 @@ const login = (req, res) => {
                 
                 var token = jwt.sign(tokenData, config.getConfig('jwt').key);
                     
-                return res.status(200).send({jwt: token, fullname :`${data.first_name} ${data.last_name}`} )
+                return res.status(200).send({jwt: token, fullname :`${data.first_name} ${data.last_name}`, confirmed : data.confirmed} )
             }
             return res.status(400).send('Wrong Password');
         });
@@ -196,13 +196,6 @@ const changePassword = (req, res) => {
 }
 
 const confirm = (req, res) => {
-    // koga nekoj kje klikne na 
-    // http://localhost:8001/api/v1/confirm/[CONFIRM_HASH]
-    // go nosi na ovoj handler
-    // go prezemate hash-ot
-    // proveruvate vo baza dali vakov hash postoi
-    // ako postoi na istiot record mu setirate
-    // confirmed: true
     var hash = req.params.confirm_hash;
     mUsers.confirmUserAccount(hash)
     .then(() => {
