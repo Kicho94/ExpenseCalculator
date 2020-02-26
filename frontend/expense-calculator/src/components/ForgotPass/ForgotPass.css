@@ -1,0 +1,11 @@
+#fieldlabel {
+    text-align: center;
+    color: #8D8D8D;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.email{
+    margin-top: 1.5rem;
+    height: 2rem;
+    font-size: 1rem;
+    }

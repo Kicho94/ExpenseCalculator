@@ -9,7 +9,16 @@ export default class EditProfile extends React.Component {
         super(props)
         this.state = {
             showModal : null,
-            valid : false
+            valid : false,
+            created : "",
+            birth_date : "",
+            first_name : "",
+            last_name : "",
+            email : "",
+            telephone : "",
+            loading: false,
+            redirect:false
+
         }
     }
     toggleModal = () => {
@@ -56,6 +65,7 @@ export default class EditProfile extends React.Component {
     }
 
     updateUser = () => {
+        this.setState({loading: true})
         if(!this.state.valid){
             alert('PLEASE SELECT THE DATE AS SHOWN');
             window.location.reload()
@@ -79,7 +89,8 @@ export default class EditProfile extends React.Component {
             .then((response)=> {
                 if(response.status == 200){
                     alert('User successfully updated')
-                    window.location.reload()
+                    localStorage.clear()
+                    this.setState({redirect:true})
                 }
             })
             .catch((err)=>{
@@ -90,6 +101,10 @@ export default class EditProfile extends React.Component {
     }
     
     render(){
+        if(this.state.redirect){
+            return <Redirect to= '/'/>
+        }
+        const loading = this.state.loading
         var modal = null
         if(this.state.showModal){
             modal = <ChangeP toggle={this.toggleModal}/>
@@ -107,34 +122,34 @@ export default class EditProfile extends React.Component {
         
             <p className="input-holder">
                 <label className="field-label" >First Name</label>
-                <input type="text" className="text-field" id="first_name" placeholder={this.state.first_name} onChange={this.saveProfile}/>
+                <input type="text" className="text-field" id="first_name" defaultValue={this.state.first_name} onChange={this.saveProfile}/>
             </p> 
 
             <p className="input-holder">
 				<label className="field-label">Last Name</label>
-				<input type="text" className="text-field" id="last_name" placeholder={this.state.last_name} onChange={this.saveProfile}/>
+				<input type="text" className="text-field" id="last_name" defaultValue={this.state.last_name} onChange={this.saveProfile}/>
 		    </p> 
 
             <p className="input-holder">
                 <label className="field-label">E-Mail</label>
-                <input type="text" className="text-field" id="email" placeholder={this.state.email} onChange={this.saveProfile}/>
+                <input type="text" className="text-field" id="email" defaultValue={this.state.email} onChange={this.saveProfile}/>
 			</p> 
 
 			
 		    <p className="input-holder">
 			    <label className="field-label">Birth Date</label>
-			    <input type="text" className="text-field" id="birth_date" placeholder={this.state.birth_date} onChange={this.validate}/>
+			    <input type="text" className="text-field" id="birth_date" defaultValue={this.state.birth_date} onChange={this.validate}/>
 		    </p> 
 
 		    <p className="input-holder">
 		    	<label className="field-label">Telephone</label>
-			    <input type="number" className="text-field" min="0" id="telephone" placeholder={this.state.telephone} onChange={this.saveProfile}/>
+			    <input type="number" className="text-field" min="0" id="telephone" defaultValue={this.state.telephone} onChange={this.saveProfile}/>
 		     </p > 
 
              <p className="input-holder">
         <label className="field-label">Created  {this.state.created}</label>    
 		     </p >
-	    <button className="main-button register-button" onClick={this.updateUser}>COMPLETE</button>
+	    <button className="main-button register-button" onClick={this.updateUser}>{loading && <i className="fa fa-refresh fa-spin"></i>}COMPLETE</button>
              
     </div>
 

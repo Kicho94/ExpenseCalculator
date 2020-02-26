@@ -14,7 +14,8 @@ export default class EditProduct extends React.Component {
             product_price: undefined,
             redirect : false,
             data : {},
-            valid : false
+            valid : false,
+            loading: false
         }
     }
 
@@ -60,10 +61,15 @@ export default class EditProduct extends React.Component {
 
 
     createProduct = () => {
+        this.setState({loading:true})
             if(!this.state.valid){
                 alert('PLEASE SELECT THE DATE AS SHOWN');
                 window.location.reload()
-            } else {
+            }else if(this.state.product_desc.length < 1  || this.state.product_name.length < 1  || this.state.product_price.length < 1 || this.state.product_type.length < 1  || this.state.purchase_date.length < 1 ){
+                alert('PLEASE FILL OUT ALL OF THE FIELDS')
+                this.setState({loading : false})
+            }
+             else {
         
         const data = {
             product_name: this.state.product_name,
@@ -104,7 +110,7 @@ export default class EditProduct extends React.Component {
         if (this.state.redirect){
             return <Redirect to = "/products"/>
         }
-
+const loading = this.state.loading
         return (
             <React.Fragment>
             <Header/>
@@ -117,31 +123,31 @@ export default class EditProduct extends React.Component {
         
             <p className="input-holder">
                 <label className="field-label" >Product Name</label>
-                <input type="text" className="text-field" id="product_name" onChange={this.saveProduct} placeholder={this.state.data.product_name}/>
+                <input type="text" className="text-field" id="product_name" onChange={this.saveProduct} defaultValue={this.state.data.product_name}/>
             </p> 
 
             <p className="input-holder">
 				<label className="field-label">Product Type</label>
-				<input type="text" className="text-field" id="product_type" onChange={this.saveProduct} placeholder={this.state.data.product_type}/>
+				<input type="text" className="text-field" id="product_type" onChange={this.saveProduct} defaultValue={this.state.data.product_type}/>
 		    </p> 
 
             <p className="input-holder">
                 <label className="field-label">Product Description</label>
-                <input type="text" className="text-field" id="product_desc" onChange={this.saveProduct} placeholder={this.state.data.product_desc}/>
+                <input type="text" className="text-field" id="product_desc" onChange={this.saveProduct} defaultValue={this.state.data.product_desc}/>
 			</p> 
 
 			
 		    <p className="input-holder">
 			    <label className="field-label">Purchase Date</label>
-			    <input type="text" className="text-field" id="purchase_date" onChange={this.validate} placeholder={this.state.data.purchase_date} />
+			    <input type="text" className="text-field" id="purchase_date" onChange={this.validate} defaultValue={this.state.data.purchase_date} />
 		    </p> 
 
 		    <p className="input-holder">
 		    	<label className="field-label">Product Price</label>
-			    <input type="number" className="text-field" min="0" id="product_price" onChange={this.saveProduct} placeholder={this.state.data.product_price}/>
+			    <input type="number" className="text-field" min="0" id="product_price" onChange={this.saveProduct} defaultValue={this.state.data.product_price}/>
 		     </p > 
 
-	    <button className="main-button register-button" onClick={this.createProduct}>COMPLETE</button>
+	    <button className="main-button register-button" onClick={this.createProduct}>{loading && <i className="fa fa-refresh fa-spin"></i>} COMPLETE</button>
              
     </div>
 

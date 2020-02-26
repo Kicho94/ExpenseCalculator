@@ -10,11 +10,12 @@ export default class NewProduct extends React.Component {
             product_name: '',
             product_desc: '',
             product_type: '',
-            purchase_date: undefined,
-            product_price: undefined,
+            purchase_date: "",
+            product_price: "",
             redirect : false,
             valid : false,
-            quantity: "1"
+            quantity: "1",
+            loading: false
            
         }
     }
@@ -31,10 +32,14 @@ export default class NewProduct extends React.Component {
 	}
 
     createProduct = () => {
+        this.setState({loading:true})
         var counter = this.state.quantity
         if(!this.state.valid){
             alert('PLEASE SELECT THE DATE AS SHOWN')
-            window.location.reload()
+            this.setState({loading:false})
+        }else if(this.state.product_desc.length < 1  || this.state.product_name.length < 1  || this.state.product_price.length < 1 || this.state.product_type.length < 1  || this.state.purchase_date.length < 1 ){
+            alert('PLEASE FILL OUT ALL OF THE FIELDS')
+            this.setState({loading:false})
         } else {
             for(let i = 1; i <= this.state.quantity; i++){
         const data = {
@@ -59,8 +64,10 @@ export default class NewProduct extends React.Component {
             .then((data)=> {
             console.log(data);
             if(data.status === 201){
-            alert('Product successfully added');
-            this.setState({redirect : true})
+                if(counter == i){
+                    alert('You have successfully added ' + i +   ' product/s');
+                     this.setState({redirect : true});
+                }
     }   
             }
             )   
@@ -68,7 +75,7 @@ export default class NewProduct extends React.Component {
             console.log(err)
             alert('Something went wrong')
             })
-            if(counter === i){break;} 
+            if(counter == i){break;} 
         }
     } 
 }
@@ -80,7 +87,7 @@ export default class NewProduct extends React.Component {
         if (this.state.redirect){
             return <Redirect to = "/products" />
         }
-
+        const loading = this.state.loading
         return (
             <React.Fragment>
             <Header/>
@@ -130,7 +137,7 @@ export default class NewProduct extends React.Component {
              <option value="10">10</option>
          </select>
 
-	    <button className="main-button register-button" onClick={this.createProduct}>CREATE NEW PRODUCT</button>
+	    <button className="main-button register-button" onClick={this.createProduct}>{loading && <i className="fa fa-refresh fa-spin"></i>} CREATE NEW PRODUCT</button>
              
     </div>
 

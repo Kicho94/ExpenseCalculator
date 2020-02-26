@@ -8,7 +8,8 @@ import Expenses from './components/Expenses/Expenses';
 import NewProduct from './components/NewProduct/NewProduct';
 import EditProduct from './components/EditProduct/EditProduct'
 import EditProfile from './components/EditProfile/EditProfile';
-
+import ForgotPass from './components/ForgotPass/ForgotPass'
+import ResetPass from './components/ResetPass/ResetPass'
 
 export default class App extends React.Component {
 
@@ -22,6 +23,8 @@ export default class App extends React.Component {
           
           <Route exact path = '/' component = {Login} />
           <Route exact path = '/register' component = {Register} />
+          <Route exact path = '/forgot-password' component = {ForgotPass} />
+          <Route exact path = '/reset-password/:id' component = {ResetPass}/>
           {localStorage.getItem('jwt') ?  undefined : <Redirect to="/"/> }
           <Route exact path = '/products' component = {Products}/>
           <Route exact path = '/expenses' component ={Expenses} />

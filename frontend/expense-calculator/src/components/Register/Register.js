@@ -15,7 +15,8 @@ export default class Register extends React.Component {
 			country : "",
 			password : "",
 			redirect : false,
-			valid : false
+			valid : false,
+			loading:false
 		};
 		this.saveUser = this.saveUser.bind(this)
 		this.registerUser = this.registerUser.bind(this);
@@ -34,6 +35,7 @@ export default class Register extends React.Component {
 		this.setState({valid, [event.target.id] : event.target.value})
 	}
 	registerUser = (event) =>{
+		this.setState({loading:true})
 		if(this.state.first_name.length < 0 ||
 			this.state.last_name.length < 0 ||
 			this.state.email.length < 0 ||
@@ -43,13 +45,20 @@ export default class Register extends React.Component {
 			this.state.password.length < 0
 		) {
 			alert('PLEASE FILL OUT ALL OF THE FIELDS');
+			this.setState({loading:false})
 		} else if(this.state.email.indexOf('@') <= 0){
 			alert("Please enter a valid email");
+			this.setState({loading:false})
 		} else if (this.state.password.length < 3) { 
 			alert("Password must be at least 3 characters");
+			this.setState({loading:false})
 		} else if(!this.state.valid){
 			alert("Please create the date as shown")
-			window.location.reload()
+			this.setState({loading:false})
+		}
+		else if(this.state.telephone.length < 8){
+			alert("Telephone must be at least 8 characters")
+			this.setState({loading:false})
 		}
 		else if (this.state.first_name.length > 0 &&
 			this.state.last_name.length > 0 &&
@@ -78,7 +87,7 @@ export default class Register extends React.Component {
 			})
 			.catch((error) => {
 				console.log(data)
-				alert('something went wrong')
+				alert('User already exists')
 				window.location.reload();
 				console.error('Error:', error);
 		}) 
@@ -90,6 +99,7 @@ export default class Register extends React.Component {
 		if(this.state.redirect){
 			return <Redirect to="/" />
 		}
+		const loading = this.state.loading
 		
         return (
 			<>  
@@ -123,7 +133,7 @@ export default class Register extends React.Component {
 							<label className="field-label" >Password</label>
 							<input type="password" className="text-field" id="password" onChange={this.saveUser}/>
 						</p> 
-						<button className="main-button register-button" onClick={this.registerUser}>REGISTER</button>
+						<button className="main-button register-button" onClick={this.registerUser}>{loading && <i className="fa fa-refresh fa-spin"></i>} REGISTER</button>
 					</div>
 				</div>
 				<div className="onboarding-description">

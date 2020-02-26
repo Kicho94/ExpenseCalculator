@@ -21,7 +21,8 @@ export default class TableE extends React.Component {
                     <td>{d.product_price}</td>
                   </tr>
         })
-      }else if(this.props.vYear === "Choose Year"){
+      }
+      else if(this.props.vYear === "Choose Year"){
         tableE = 
         <tr >
               <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A YEAR</td>
@@ -33,19 +34,19 @@ export default class TableE extends React.Component {
               <td colSpan="5" style={{align : "center"}} >PLEASE CHOOSE A MONTH</td>
         </tr>
       }
-      else if(this.props.data.length < 1 && this.props.boolean === false){
-          console.log(this.props.data.length)
-          tableE = 
-          <tr >
-                <td colSpan="5" style={{align : "center"}} >PLEASE CREATE YOUR FIRST PRODUCT</td>
-          </tr>
-        }
-        else if(this.props.data.length == undefined && this.props.boolean){
-          tableE = 
+     
+        else if(this.props.data.length == undefined || this.props.vYear.indexOf("Choose Year") == 0 && this.props.boolean){
+          tableE =  
           <tr >
                 <td colSpan="5" style={{align : "center"}} >PLEASE SELECT A YEAR</td>
           </tr>
-        }; 
+        } else if(this.props.data.length == undefined || this.props.vYear.indexOf("all") == 0 && this.props.boolean){
+          tableE =  
+          <tr >
+                <td colSpan="5" style={{align : "center"}} >YOU DONT HAVE ANY PRODUCTS</td>
+          </tr>
+        } 
+        
        
         return <div>
         <table className="products-table">

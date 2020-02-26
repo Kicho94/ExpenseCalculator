@@ -17,7 +17,7 @@ api.use(cors());
 api.use(
     jwt( {secret: config.getConfig('jwt').key} )
     .unless(
-        { path: ['/api/v1/register', '/api/v1/login', '/api/v1/confirm/:confirm_hash']}
+        { path: ['/api/v1/register', '/api/v1/login', '/api/v1/confirm/:confirm_hash', '/api/v1/reset-password', '/api/v1/reset-link']}
     )
 );
 

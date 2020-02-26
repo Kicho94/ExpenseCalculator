@@ -47,22 +47,19 @@ const register = (req, res) => {
                         });
                         
                     });
-                } else {
-                    throw new Error('Bad Request - User Exists')
+                } else if(ed){
+                   console.log('Bad Request - User Exists')
                     return res.status(400).send('User exists')
                 }
             })
             .catch((err) => {
-                throw new Error(err);
+                console.log(err)
             })
            
             
             }else {
-                console.log(Error)
+            console.log(Error)
             throw new Error('Validation failed');
-            
-            
-            
         }   
     })
     .then(() => {
@@ -76,7 +73,6 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
-    
     mUsers.getUserPasswordByEmail(req.body.email)
     .then((data)=> {
         console.log(data)
@@ -95,24 +91,77 @@ const login = (req, res) => {
                     
                 return res.status(200).send({jwt: token, fullname :`${data.first_name} ${data.last_name}`} )
             }
-            return res.status(200).send('not found');
+            return res.status(400).send('Wrong Password');
         });
        
     })
     .catch(err => {
         console.log(err);
-        return res.status(500).send('internal server error')
+        return res.status(404).send('Could not find email')
     });      
 }
     
 const renew = (req, res) => {
-    return res.status(200).send(req.user.id);
+    return res.status(200).send(req.body);
 }
+
+
 const resetLink = (req, res) => {
+       mUsers.getUserPasswordByEmail(req.body.email)
+        .then((data)=>{
+        sgMail.setApiKey(config.getConfig('mailer').key);
+        let msg = {
+            to : req.body.email,
+            from : 'kspasovski1@gmail.com',
+            subject : 'Thanks for registering',
+            text : 'Thanks for registering',
+            html : `<strong><a href = "http://localhost:3000/reset-password/${data.confirm_hash}">Reset-password link</a><strong/>`,
+        };
+        sgMail.send(msg);
+        console.log('zdravo')
+        
+        
+        return res.status(200).send('Reset link sent')
+    })
+    .catch((err)=>{ console.log(err); return res.status(404).send('Not found')})
+    setTimeout(()=>{
+        var confirm_hash = randomstring.generate({
+            length: 30,
+            charset: 'alphanumeric'
+        });
+        mUsers.updateHash(req.body.email, confirm_hash)
+        .then(()=> {console.log('confirm hash changed')})
+        .catch(()=> {console.log('something went wrong with the hash')})
+    }, 300000)
 }
+
+
 const resetPassword = (req, res) => {
-    return res.status(200).send('ok');
+    if(req.body.newPassword.length > 2){
+    mUsers.getHash(req.body.confirm)
+    .then((data)=>{
+        console.log(data)
+        if(data){
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.newPassword, salt, function(err, hash){
+            if(err){
+                throw new Error(err);
+                return;
+            };  
+    mUsers.resetPassword(req.body.confirm, hash)
+    return res.status(200).send('Passwork changed')
+                     });
+                })
+    } else if(!data){
+        return res.status(404).send('NOT FOUND') 
+    }
+})
+.catch(err=>{console.log(err)})
 }
+else{res.status(500).send('BAD REQUEST')}
+}
+
+
 const changePassword = (req, res) => {
     mUsers.getUserPasswordByEmail(req.user.email)
     .then((data)=>{
@@ -120,7 +169,7 @@ const changePassword = (req, res) => {
             if(err){
                 return res.status(500).send("Could not compare password");
             }  
-            if(rez){
+             if(rez){
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash(req.body.newPassword, salt, function(err, hash) {
                         if(err){
@@ -128,18 +177,23 @@ const changePassword = (req, res) => {
                             return;
                         }   
                 mUsers.updateP(req.user.email, hash)
-                  .then(()=> {
+                  
                     console.log('Password changed successfully')
                  return res.status(200).send('Password successfully changed')
-                })
-               .catch((err)=> {console.log(err)})
             });
             })
 
             }
-        })
+            else {return res.status(500).send('Bad request1')}
+        });
+        
+    })
+    .catch((err)=>{
+        console.log(err);
+        return res.status(404).send('Something went wrong')
     })
 }
+
 const confirm = (req, res) => {
     // koga nekoj kje klikne na 
     // http://localhost:8001/api/v1/confirm/[CONFIRM_HASH]
