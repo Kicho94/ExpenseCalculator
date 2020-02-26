@@ -39,13 +39,10 @@ export default class Login extends React.Component {
                 ) 
             .then(res => res.json())
             .then(d=>{
-               if(!d.confirmed){
-                   alert('Please confirm your account')
-               }else {
                 localStorage.setItem('jwt', d.jwt);
                 localStorage.setItem('fullname', d.fullname);
                 window.location.reload()      
-            }         
+                    
             })
             .catch(err =>{
                 console.log(err);
