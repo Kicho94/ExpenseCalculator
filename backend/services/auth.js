@@ -11,7 +11,7 @@ db.init(c);
 
 
 var api = express();
-
+// var confirm = /^\/api\/v1\/confirm\/([A-Z][a-z][0-1])$/g
 api.use(bodyParser.json());
 api.use(cors());
 api.use(
