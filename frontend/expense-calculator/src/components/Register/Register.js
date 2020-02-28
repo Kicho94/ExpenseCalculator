@@ -36,14 +36,14 @@ export default class Register extends React.Component {
 	}
 	registerUser = (event) =>{
 		this.setState({loading:true})
-		if(this.state.first_name.length < 0 ||
-			this.state.last_name.length < 0 ||
-			this.state.email.length < 0 ||
-			this.state.birth_date.length < 0 ||
+		if(this.state.first_name.length <= 0 ||
+			this.state.last_name.length <= 0 ||
+			this.state.email.length <= 0 ||
+			this.state.birth_date.length <= 0 ||
 			this.state.telephone === null  ||
-			this.state.country.length < 0 ||
-			this.state.password.length < 0
-		) {
+			this.state.country.length <= 0 ||
+			this.state.password.length <= 0
+		){
 			alert('PLEASE FILL OUT ALL OF THE FIELDS');
 			this.setState({loading:false})
 		} else if(this.state.email.indexOf('@') <= 0){
@@ -66,7 +66,7 @@ export default class Register extends React.Component {
 			this.state.birth_date.length > 0 &&
 			this.state.telephone.length > 0 &&
 			this.state.country.length > 0 &&
-			this.state.password.length > 3
+			this.state.password.length > 2
 		){	
 			const data = {
 				first_name : this.state.first_name,
