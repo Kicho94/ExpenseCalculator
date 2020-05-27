@@ -1,6 +1,4 @@
-FROM kicho94/testnodeapp
-
-EXPOSE 8080
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
@@ -10,7 +8,6 @@ RUN npm install
 
 COPY . .
 
-CMD ["node", "services/products.js" ]
 
 
 

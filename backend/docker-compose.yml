@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+    users:
+        build: .
+        ports: 
+            - "8081:8081"
+        command: ["node", "services/auth.js"]
+    products:
+        build: .
+        ports: 
+            - "8080:8080"
+        command: ["node", "services/products"]
+    reactapp: 
+        image: 'testreactapp'
+        ports: 
+            - "3000:3000"
