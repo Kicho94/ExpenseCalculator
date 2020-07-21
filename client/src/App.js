@@ -25,7 +25,7 @@ export default class App extends React.Component {
           <Route exact path = '/register' component = {Register} />
           <Route exact path = '/forgot-password' component = {ForgotPass} />
           <Route exact path = '/reset-password/:id' component = {ResetPass}/>
-          {localStorage.getItem('jwt') && <Redirect to="/"/> }
+          {!localStorage.getItem('jwt') && <Redirect from='/' exact to='/' />}
           <Route exact path = '/products' component = {Products}/>
           <Route exact path = '/expenses' component ={Expenses} />
           <Route exact path = '/newproduct' component = {NewProduct}/>
