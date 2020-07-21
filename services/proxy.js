@@ -23,11 +23,13 @@ api.all("/*", (req, res) => {
 //   res.status(400).send("not found");
 // });
 
-api.listen(process.env.PORT || 5000, err => {
+const PORT = process.env.PORT || 5000;
+
+api.listen(PORT, err => {
   if (err) {
     console.log("could not start server");
     console.log(err);
     return;
   }
-  console.log('PROXY STARTED');
+  console.log(`SERVER STARTED ON ${PORT}`);
 });
