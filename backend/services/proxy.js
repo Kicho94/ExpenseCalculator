@@ -22,7 +22,7 @@ api.all("/*", (req, res) => {
 //   res.status(400).send("not found");
 // });
 
-api.listen(process.env.PORT || 5000, err => {
+api.listen(process.env.PORT, err => {
   if (err) {
     console.log("could not start server");
     console.log(err);
