@@ -73,6 +73,7 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
+    console.log(req)
     mUsers.getUserPasswordByEmail(req.body.email)
     .then((data)=> {
         console.log(data)

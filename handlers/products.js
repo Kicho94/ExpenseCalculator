@@ -1,7 +1,7 @@
 const mProducts = require('../models/products')
 
 const getAll = (req, res) => {
-    console.log(req.user)
+    console.log(req)
    
     let q = {user_id : req.user.id};
                                

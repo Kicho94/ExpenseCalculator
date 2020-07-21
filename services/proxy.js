@@ -6,7 +6,6 @@ var api = express();
 var apiProxy = proxy.createProxyServer();
 
 api.all("/api/v1/auth/*", (req, res) => {
-  console.log("AUTH")
   apiProxy.web(req, res, { target: "http://localhost:8081" });
 });
 
@@ -23,7 +22,7 @@ api.all("/*", (req, res) => {
 //   res.status(400).send("not found");
 // });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 api.listen(PORT, err => {
   if (err) {
