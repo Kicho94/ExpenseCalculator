@@ -38,7 +38,7 @@ export default class Login extends React.Component {
                  }
                 ) 
             .then(res => res.json())
-            .then(d=>{
+            .then(d=>{  
                 localStorage.setItem('jwt', d.jwt);
                 localStorage.setItem('fullname', d.fullname);
                 window.location.reload()      
