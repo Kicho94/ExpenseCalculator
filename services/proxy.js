@@ -23,7 +23,7 @@ api.all("/*", (req, res) => {
 //   res.status(400).send("not found");
 // });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 api.listen(PORT, err => {
   if (err) {
