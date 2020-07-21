@@ -1,8 +1,8 @@
 const mProducts = require('../models/products')
 
 const getAll = (req, res) => {
-    
-    console.log(req.query);
+    console.log(req.user)
+   
     let q = {user_id : req.user.id};
                                
             
@@ -40,7 +40,6 @@ const getAll = (req, res) => {
     mProducts.getAll(q, sort)
     .then(data => {
     res.status(200).send(data);
-    console.log(data)
     })
     .catch(err => {
         res.status(500).send(err);

@@ -9,7 +9,7 @@ services:
         build: .
         ports: 
             - "8080:8080"
-        command: ["node", "services/products"]
+        command: "node services/auth.js && node services/products.js"
     reactapp: 
         image: 'testreactapp'
         ports: 
