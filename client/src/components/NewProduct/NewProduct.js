@@ -51,7 +51,7 @@ export default class NewProduct extends React.Component {
             _created: new Date()
         }
         fetch(
-            '/api/v1/products', 
+            '/api/v1/products/', 
         {
             method: 'post',
             headers: {

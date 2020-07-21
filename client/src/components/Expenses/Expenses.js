@@ -62,7 +62,7 @@ export default class Expenses extends React.Component {
         const dateEnd = new Date(`${yearNumber}-1-1`).getTime()
         
 
-        fetch(`/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
+        fetch(`/api/v1/products/?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
         {
             method : 'GET',
             headers :{
@@ -90,7 +90,7 @@ export default class Expenses extends React.Component {
         const dateEnd = new Date(`${yearNumber}-1-1`).getTime()
         
 
-        fetch(`/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
+        fetch(`/api/v1/products/?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
         {
             method : 'GET',
             headers :{
@@ -118,7 +118,7 @@ export default class Expenses extends React.Component {
         if(monthTo === '13'){
             dateEnd = new Date(`${(Number(this.state.vYear) + 1)}-1-1`).getTime()
         }
-        fetch(`/api/v1/products?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
+        fetch(`/api/v1/products/?purchase_date_from=${dateStart}&purchase_date_to=${dateEnd}`,
         {
             method : 'GET',
             headers :{
@@ -142,7 +142,7 @@ export default class Expenses extends React.Component {
 
     getAlldata = () => {
     
-        fetch('/api/v1/products?sort=purchase_date:-1',
+        fetch('/api/v1/products/?sort=purchase_date:-1',
     {
         method : 'get',
         headers: {

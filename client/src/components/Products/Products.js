@@ -32,7 +32,7 @@ export default class Products extends React.Component {
             }
     
     getData = () => {
-        fetch(`/api/v1/products?sort=${this.state.value}`,
+        fetch(`/api/v1/products/?sort=${this.state.value}`,
             {
                 method : 'get',
                 headers: {
