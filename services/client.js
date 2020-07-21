@@ -8,11 +8,11 @@ api.use(cors());
 api.use(bodyParser.json());
 
 // Serve build version-static files from the React app
-api.use(express.static(path.join(__dirname, "../expense-calculator/build")));
+api.use(express.static(path.join(__dirname, "../client/build")));
 
 api.get("/*", function(req, res) {
-  console.log("Path", path.join(__dirname, "../expense-calculator/build", "index.html"));
-  res.sendFile(path.join(__dirname, "../expense-calculator/build", "index.html"));
+  console.log("Path", path.join(__dirname, "../client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
 api.listen(8082, err => {
