@@ -6,11 +6,12 @@ var api = express();
 var apiProxy = proxy.createProxyServer();
 
 api.all("/api/v1/auth/*", (req, res) => {
-  
+  console.log("AUTH")
   apiProxy.web(req, res, { target: "http://localhost:8081" });
 });
 
 api.all("/api/v1/products/*", (req, res) => {
+  console.log("PRODUCTS")
   apiProxy.web(req, res, { target: "http://localhost:8080" });
 });
 
